@@ -18,8 +18,6 @@ export default function RegisterForm() {
 			console.log("Please, provide all values");
 			return;
 		}
-
-		// setFormValues(data);
 		if (isMember) {
 			dispatch(loginUser(data));
 		} else {
