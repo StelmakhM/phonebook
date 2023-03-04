@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { addNewContact } from "../redux/contacts/contactsThunk";
 import { saveFormData } from "../utils/saveFormData";
+import FormRow from "./FormRow";
 
 export default function AddContactForm() {
 	const dispatch = useDispatch();
@@ -19,12 +20,9 @@ export default function AddContactForm() {
 
 	return (
 		<form onSubmit={onFormSubmit}>
-			<label htmlFor="name">Name</label>
-			<input type="text" name="name" id="name" />
-			<label htmlFor="phone">Phone</label>
-			<input type="text" name="phone" id="phone" />
-			<label htmlFor="emai">Email</label>
-			<input type="email" name="email" id="email" />
+			<FormRow type="text" name="name" />
+			<FormRow type="text" name="phone" />
+			<FormRow type="email" name="email" />
 			<button type="submit">Add contact</button>
 		</form>
 	);

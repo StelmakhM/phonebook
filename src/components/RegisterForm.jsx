@@ -39,9 +39,9 @@ export default function RegisterForm() {
 		<>
 			<form onSubmit={onFormSubmit}>
 				<h3>{isMember ? "Login" : "Register"}</h3>
-				{!isMember && <FormRow type="text" id="name" name="name" />}
-				<FormRow type="email" id="email" name="email" />
-				<FormRow type="password" id="password" name="password" />
+				{!isMember && <FormRow type="text" name="name" />}
+				<FormRow type="email" name="email" />
+				<FormRow type="password" name="password" />
 				<button type="submit" onSubmit={onFormSubmit}>
 					Submit
 				</button>

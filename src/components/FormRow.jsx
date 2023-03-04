@@ -1,6 +1,4 @@
-import React from "react";
-
-export default function FormRow({ type, name, value, onChange }) {
+export default function FormRow({ type, name, value, onChange, checked }) {
 	return (
 		<>
 			<label>
@@ -10,6 +8,7 @@ export default function FormRow({ type, name, value, onChange }) {
 					name={name}
 					value={value}
 					onChange={onChange}
+					checked={checked}
 				/>
 			</label>
 		</>

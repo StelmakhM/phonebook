@@ -1,10 +1,6 @@
-import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import {
-	getAllContacts,
-	getContactById,
-	updateContactById,
-} from "../redux/contacts/contactsThunk";
+import { updateContactById } from "../redux/contacts/contactsThunk";
+import FormRow from "./FormRow";
 
 export default function ContactItem({
 	_id,
@@ -17,25 +13,23 @@ export default function ContactItem({
 }) {
 	const dispatch = useDispatch();
 
+	const onChange = () => {
+		dispatch(
+			updateContactById({
+				id: _id,
+				data: {
+					favorite: !favorite,
+				},
+			})
+		);
+	};
+
 	return (
 		<li>
 			<p>Name: {name}</p>
 			<p>Email: {email}</p>
 			<p>Phone: {phone}</p>
-			<input
-				type="checkbox"
-				checked={favorite}
-				onChange={() =>
-					dispatch(
-						updateContactById({
-							id: _id,
-							data: {
-								favorite: !favorite,
-							},
-						})
-					)
-				}
-			/>
+			<FormRow type="checkbox" checked={favorite} onChange={onChange} />
 			<button onClick={() => onRemoveBtnClick(_id)}>Remove</button>
 			<button onClick={() => onEditBtnClick(_id)}>Edit</button>
 		</li>

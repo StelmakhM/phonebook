@@ -73,7 +73,7 @@ export default function Modal({ hideModal, contactId }) {
 					<FormRow
 						type="checkbox"
 						name="favorite"
-						value={favorite}
+						checked={favorite}
 						onChange={onInputChange}
 					/>
 					<button type="submit">Save</button>
