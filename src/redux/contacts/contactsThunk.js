@@ -25,6 +25,18 @@ export const getContactById = createAsyncThunk(
 	}
 );
 
+export const addNewContact = createAsyncThunk(
+	"contacts/addNewContact",
+	async (contact, thunkAPI) => {
+		try {
+			const response = await customFetch.post("/contacts", contact);
+			return response.data;
+		} catch (error) {
+			return thunkAPI.rejectWithValue(error);
+		}
+	}
+);
+
 export const removeContactById = createAsyncThunk(
 	"contacts/removeById",
 	async (id, thunkAPI) => {
@@ -39,9 +51,9 @@ export const removeContactById = createAsyncThunk(
 
 export const updateContactById = createAsyncThunk(
 	"contacts/updateById",
-	async (id, thunkAPI) => {
+	async ({ id, data }, thunkAPI) => {
 		try {
-			const response = await customFetch.patch(`/contacts/${id}`);
+			const response = await customFetch.patch(`/contacts/${id}`, data);
 			return response.data;
 		} catch (error) {
 			return thunkAPI.rejectWithValue(error);

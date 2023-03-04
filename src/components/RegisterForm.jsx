@@ -1,11 +1,21 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router";
 import { loginUser, registerUser } from "../redux/user/userThunk";
 import { saveFormData } from "../utils/saveFormData";
+import FormRow from "./FormRow";
 
 export default function RegisterForm() {
 	const [isMember, setIsMember] = useState(false);
+	const { user } = useSelector((state) => state.user);
+	const navigate = useNavigate();
 	const dispatch = useDispatch();
+
+	useEffect(() => {
+		if (user) {
+			navigate("/contacts");
+		}
+	}, [user, navigate]);
 
 	const toggleMember = () => {
 		setIsMember(!isMember);
@@ -29,27 +39,15 @@ export default function RegisterForm() {
 		<>
 			<form onSubmit={onFormSubmit}>
 				<h3>{isMember ? "Login" : "Register"}</h3>
-				{!isMember && (
-					<>
-						<label htmlFor="name">Name</label>
-						<input type="name" name="name" id="name" />
-					</>
-				)}
-
-				<label htmlFor="email">Email</label>
-				<input type="email" name="email" id="email" />
-				<label htmlFor="password">Password</label>
-				<input type="password" name="password" id="password" />
+				{!isMember && <FormRow type="text" id="name" name="name" />}
+				<FormRow type="email" id="email" name="email" />
+				<FormRow type="password" id="password" name="password" />
 				<button type="submit" onSubmit={onFormSubmit}>
 					Submit
 				</button>
 				<p>
 					{isMember ? "Not a member yet ?" : "Already a member ?"}
-					<button
-						type="button"
-						onClick={toggleMember}
-						className="member-btn"
-					>
+					<button type="button" onClick={toggleMember}>
 						{isMember ? "Register" : "Login"}
 					</button>
 				</p>

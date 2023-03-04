@@ -14,6 +14,7 @@ import {
 const initialState = {
 	user: getUserFromLocalStorage(),
 	isLoading: false,
+	isLoggedIn: false,
 };
 
 const userPending = (state, _) => {
@@ -24,6 +25,7 @@ const userFulfilled = (state, { payload }) => {
 	const { user } = payload;
 	state.isLoading = false;
 	state.user = user;
+	state.isLoggedIn = true;
 	addUserToLocalStorage(user);
 };
 const userRejected = (state, { payload }) => {
