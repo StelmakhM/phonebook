@@ -1,16 +1,23 @@
-export default function FormRow({ type, name, value, onChange, checked }) {
+export default function FormRow({
+	type,
+	name,
+	value,
+	onChange,
+	checked,
+	placeholder,
+}) {
 	return (
 		<>
-			<label>
-				{name}
-				<input
-					type={type}
-					name={name}
-					value={value}
-					onChange={onChange}
-					checked={checked}
-				/>
-			</label>
+			<label htmlFor={name}>{name}</label>
+			<input
+				id={name}
+				type={type}
+				name={name}
+				value={value}
+				onChange={onChange}
+				checked={checked}
+				placeholder={placeholder}
+			/>
 		</>
 	);
 }

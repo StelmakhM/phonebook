@@ -5,12 +5,15 @@ import {
 	removeContactById,
 } from "../redux/contacts/contactsThunk";
 import ContactItem from "./ContactItem";
+import ContactFilter from "./ContactsFilter";
 import Modal from "./Modal";
 
 export default function ContactsList() {
 	const { contacts } = useSelector((state) => state.contacts);
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [contactId, setContactId] = useState("");
+	const [filter, setFilter] = useState("");
+
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -30,10 +33,15 @@ export default function ContactsList() {
 		setIsModalOpen(true);
 	};
 
+	const visibleContacts = contacts.filter((contact) =>
+		contact.name.toLowerCase().includes(filter.toLowerCase())
+	);
+
 	return (
 		<>
+			<ContactFilter filter={filter} setFilter={setFilter} />
 			<ul>
-				{contacts.map((contact) => (
+				{visibleContacts.map((contact) => (
 					<ContactItem
 						key={contact._id}
 						{...contact}

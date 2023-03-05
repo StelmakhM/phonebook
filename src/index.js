@@ -1,6 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
+import "./assets/fonts/Exo2-VariableFont_wght.ttf";
+import "./assets/fonts/EBGaramond-VariableFont_wght.ttf";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";

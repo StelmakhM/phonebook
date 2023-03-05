@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import { loginUser, registerUser } from "../redux/user/userThunk";
-import { saveFormData } from "../utils/saveFormData";
-import FormRow from "./FormRow";
+import { loginUser, registerUser } from "../../redux/user/userThunk";
+import { saveFormData } from "../../utils/saveFormData";
+import FormRow from "../FormRow";
+import { Wrapper } from "./RegisterForm.styled";
+import logo from "../../assets/images/phone-logo.svg";
 
 export default function RegisterForm() {
 	const [isMember, setIsMember] = useState(false);
@@ -37,7 +39,11 @@ export default function RegisterForm() {
 	};
 	return (
 		<>
-			<form onSubmit={onFormSubmit}>
+			<Wrapper onSubmit={onFormSubmit}>
+				<div className="app-title">
+					<img src={logo} alt="phonebook" className="logo" />
+					<h1>Phonebook</h1>
+				</div>
 				<h3>{isMember ? "Login" : "Register"}</h3>
 				{!isMember && <FormRow type="text" name="name" />}
 				<FormRow type="email" name="email" />
@@ -51,7 +57,7 @@ export default function RegisterForm() {
 						{isMember ? "Register" : "Login"}
 					</button>
 				</p>
-			</form>
+			</Wrapper>
 		</>
 	);
 }
