@@ -31,6 +31,7 @@ const userFulfilled = (state, { payload }) => {
 const userRejected = (state, { payload }) => {
 	state.isLoading = false;
 	console.log(payload);
+	alert(payload);
 };
 
 const userSlice = createSlice({
