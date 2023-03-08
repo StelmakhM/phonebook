@@ -10,15 +10,17 @@ import {
 const initialState = {
 	contacts: [],
 	isLoading: false,
+	contactDetails: {},
 };
 
-const contactsPending = (state, action) => {
+const contactsPending = (state, _) => {
 	state.isLoading = true;
 };
 
 const contactsRejected = (state, { payload }) => {
-	state.isLoading = false;
 	console.log(payload);
+	state.isLoading = false;
+	// console.log(payload);
 };
 
 const contactsSlice = createSlice({
@@ -30,26 +32,29 @@ const contactsSlice = createSlice({
 			.addCase(getAllContacts.fulfilled, (state, { payload }) => {
 				state.isLoading = false;
 				state.contacts = payload.data;
+				state.contactDetails = {};
 			})
 			.addCase(getAllContacts.rejected, contactsRejected)
 			.addCase(getContactById.pending, contactsPending)
 			.addCase(getContactById.fulfilled, (state, { payload }) => {
 				state.isLoading = false;
-				state.contacts = payload.data;
+				state.contactDetails = payload.data;
 			})
 			.addCase(getContactById.rejected, contactsRejected)
 			.addCase(updateContactById.pending, contactsPending)
 			.addCase(updateContactById.fulfilled, (state, { payload }) => {
-				const { _id, name, email, phone, favorite } = payload.data;
+				state.isLoading = false;
+				state.contactDetails = payload.data;
+				const { name, email, phone, address, favorite } = payload.data;
 				state.contacts.forEach((contact) => {
-					if (contact._id === _id) {
-						contact.email = email;
-						contact.phone = phone;
+					if (contact._id === payload.data._id) {
 						contact.favorite = favorite;
 						contact.name = name;
+						contact.email = email;
+						contact.phone = phone;
+						contact.address = address;
 					}
 				});
-				state.isLoading = false;
 			})
 			.addCase(updateContactById.rejected, contactsRejected)
 			.addCase(removeContactById.pending, contactsPending)

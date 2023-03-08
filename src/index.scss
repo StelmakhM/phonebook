@@ -111,3 +111,29 @@ ul {
 	list-style-type: none;
 	padding: 0;
 }
+
+.register-container {
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 0 auto;
+	transition: var(--transition-slow);
+
+	@media screen and (min-width: 768px) {
+		gap: 3rem;
+		padding: 0 2rem;
+		max-width: 1280px;
+	}
+}
+
+.container {
+	margin: 0px auto;
+	width: 90vw;
+	max-width: 400px;
+}
+
+input[type="password"] {
+	font-family: Verdana !important;
+	letter-spacing: 0.125em !important;
+}

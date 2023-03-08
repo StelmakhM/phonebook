@@ -1,13 +1,11 @@
-import React from "react";
-import ContentImage from "../components/ContentImage";
+import HeroImage from "../components/HeroImage/HeroImage";
 import RegisterForm from "../components/RegisterForm/RegisterForm";
-import hero from "../assets/images/hero-image.svg";
 
 export default function RegisterPage() {
 	return (
-		<div>
+		<div className="register-container">
+			<HeroImage />
 			<RegisterForm />
-			{/* <ContentImage src={hero} alt="phonebook app" /> */}
 		</div>
 	);
 }

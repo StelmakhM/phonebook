@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import "../../index.css";
 import { TextField } from "@mui/material";
 
 export const Wrapper = styled.form`
@@ -8,12 +7,16 @@ export const Wrapper = styled.form`
 	background-color: white;
 	max-width: 400px;
 	width: 90vw;
-	margin: 3rem auto;
 	padding: 2rem 2.5rem;
 	border-top: 5px solid var(--green-300);
 	border-radius: 7px;
 	transition: var(--transition-slow);
 	box-shadow: var(--shadow-2);
+
+	@media screen and (min-width: 768px) {
+		min-width: 370px;
+		max-width: 500px;
+	}
 
 	.title {
 		margin: 0 auto 1.5rem;
@@ -94,11 +97,11 @@ export const CssTextField = styled(TextField)`
 	}
 
 	.css-k4qjio-MuiFormHelperText-root.Mui-error {
-		font-family: var(--font-text);
 		position: absolute;
 		bottom: 0;
 		left: 0;
 		transform: translateY(100%);
+		font-family: var(--font-text);
 	}
 
 	.css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root.Mui-error

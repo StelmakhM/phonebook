@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
+import "./index.scss";
 import "./assets/fonts/Exo2-VariableFont_wght.ttf";
 import "./assets/fonts/EBGaramond-VariableFont_wght.ttf";
 import App from "./App";

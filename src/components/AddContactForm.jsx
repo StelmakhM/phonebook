@@ -23,6 +23,7 @@ export default function AddContactForm() {
 			<FormRow type="text" name="name" />
 			<FormRow type="text" name="phone" />
 			<FormRow type="email" name="email" />
+			<FormRow type="text" name="address" />
 			<button type="submit">Add contact</button>
 		</form>
 	);

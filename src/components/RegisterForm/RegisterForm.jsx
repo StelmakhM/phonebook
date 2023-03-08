@@ -20,6 +20,10 @@ export default function RegisterForm() {
 		}
 	}, [user, navigate]);
 
+	const toggleMember = () => {
+		setIsMember(!isMember);
+	};
+
 	const formik = useFormik({
 		initialValues: {
 			name: "",
@@ -39,10 +43,6 @@ export default function RegisterForm() {
 			actions.resetForm();
 		},
 	});
-
-	const toggleMember = () => {
-		setIsMember(!isMember);
-	};
 
 	return (
 		<>

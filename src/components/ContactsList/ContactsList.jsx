@@ -3,10 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import {
 	getAllContacts,
 	removeContactById,
-} from "../redux/contacts/contactsThunk";
-import ContactItem from "./ContactItem";
-import ContactFilter from "./ContactsFilter";
-import Modal from "./Modal";
+} from "../../redux/contacts/contactsThunk";
+import ContactItem from "../ContactItem/ContactItem";
+import ContactFilter from "../ContactsFilter/ContactsFilter";
+import Modal from "../Modal";
+import { List } from "./ContactsList.styled";
+import { useNavigate } from "react-router";
 
 export default function ContactsList() {
 	const { contacts } = useSelector((state) => state.contacts);
@@ -15,6 +17,7 @@ export default function ContactsList() {
 	const [filter, setFilter] = useState("");
 
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		dispatch(getAllContacts());
@@ -33,14 +36,29 @@ export default function ContactsList() {
 		setIsModalOpen(true);
 	};
 
+	if (contacts.length === 0) return;
+
 	const visibleContacts = contacts.filter((contact) =>
 		contact.name.toLowerCase().includes(filter.toLowerCase())
 	);
 
+	const onContactClick = (e) => {
+		if (e.target.tagName === "INPUT") {
+			return;
+		}
+		const { id } = e.target.closest("li").dataset;
+		navigate(`${id}`);
+	};
+
+	const onFilterChange = (e) => {
+		console.log(`object`);
+		setFilter(e.target.value);
+	};
+
 	return (
 		<>
-			<ContactFilter filter={filter} setFilter={setFilter} />
-			<ul>
+			<ContactFilter filter={filter} onChange={onFilterChange} />
+			<List onClick={onContactClick}>
 				{visibleContacts.map((contact) => (
 					<ContactItem
 						key={contact._id}
@@ -49,7 +67,7 @@ export default function ContactsList() {
 						onRemoveBtnClick={onRemoveBtnClick}
 					/>
 				))}
-			</ul>
+			</List>
 			{isModalOpen && (
 				<Modal hideModal={hideModal} contactId={contactId} />
 			)}

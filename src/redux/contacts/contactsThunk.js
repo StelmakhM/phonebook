@@ -8,7 +8,8 @@ export const getAllContacts = createAsyncThunk(
 			const response = await customFetch("/contacts");
 			return response.data;
 		} catch (error) {
-			return thunkAPI.rejectWithValue(error);
+			console.log(error);
+			return thunkAPI.rejectWithValue(error.response.data.message);
 		}
 	}
 );
@@ -20,7 +21,7 @@ export const getContactById = createAsyncThunk(
 			const response = await customFetch(`/contacts/${id}`);
 			return response.data;
 		} catch (error) {
-			return thunkAPI.rejectWithValue(error);
+			return thunkAPI.rejectWithValue(error.response.data.message);
 		}
 	}
 );
@@ -32,7 +33,7 @@ export const addNewContact = createAsyncThunk(
 			const response = await customFetch.post("/contacts", contact);
 			return response.data;
 		} catch (error) {
-			return thunkAPI.rejectWithValue(error);
+			return thunkAPI.rejectWithValue(error.response.data.message);
 		}
 	}
 );
@@ -44,7 +45,7 @@ export const removeContactById = createAsyncThunk(
 			const response = await customFetch.delete(`/contacts/${id}`);
 			return response.data;
 		} catch (error) {
-			return thunkAPI.rejectWithValue(error);
+			return thunkAPI.rejectWithValue(error.response.data.message);
 		}
 	}
 );
@@ -54,9 +55,10 @@ export const updateContactById = createAsyncThunk(
 	async ({ id, data }, thunkAPI) => {
 		try {
 			const response = await customFetch.patch(`/contacts/${id}`, data);
+			// thunkAPI.dispatch(getAllContacts());
 			return response.data;
 		} catch (error) {
-			return thunkAPI.rejectWithValue(error);
+			return thunkAPI.rejectWithValue(error.response.data.message);
 		}
 	}
 );
