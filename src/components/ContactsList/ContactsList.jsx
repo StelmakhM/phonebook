@@ -6,13 +6,12 @@ import {
 } from "../../redux/contacts/contactsThunk";
 import ContactItem from "../ContactItem/ContactItem";
 import ContactFilter from "../ContactsFilter/ContactsFilter";
-import Modal from "../Modal";
+// import Modal from "../Modal";
 import { List } from "./ContactsList.styled";
 import { useNavigate } from "react-router";
 
 export default function ContactsList() {
 	const { contacts } = useSelector((state) => state.contacts);
-	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [contactId, setContactId] = useState("");
 	const [filter, setFilter] = useState("");
 
@@ -23,18 +22,14 @@ export default function ContactsList() {
 		dispatch(getAllContacts());
 	}, [dispatch]);
 
-	const onRemoveBtnClick = (id) => {
-		dispatch(removeContactById(id));
-	};
+	// const hideModal = () => {
+	// 	setIsModalOpen(false);
+	// };
 
-	const hideModal = () => {
-		setIsModalOpen(false);
-	};
-
-	const onEditBtnClick = (id) => {
-		setContactId(id);
-		setIsModalOpen(true);
-	};
+	// const onEditBtnClick = (id) => {
+	// 	setContactId(id);
+	// 	setIsModalOpen(true);
+	// };
 
 	if (contacts.length === 0) return;
 
@@ -51,7 +46,6 @@ export default function ContactsList() {
 	};
 
 	const onFilterChange = (e) => {
-		console.log(`object`);
 		setFilter(e.target.value);
 	};
 
@@ -63,14 +57,14 @@ export default function ContactsList() {
 					<ContactItem
 						key={contact._id}
 						{...contact}
-						onEditBtnClick={onEditBtnClick}
-						onRemoveBtnClick={onRemoveBtnClick}
+						// onEditBtnClick={onEditBtnClick}
+						// onRemoveBtnClick={onRemoveBtnClick}
 					/>
 				))}
 			</List>
-			{isModalOpen && (
+			{/* {isModalOpen && (
 				<Modal hideModal={hideModal} contactId={contactId} />
-			)}
+			)} */}
 		</>
 	);
 }

@@ -1,23 +1,30 @@
 import { Checkbox } from "@mui/material";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import {
 	getContactById,
+	removeContactById,
 	updateContactById,
 } from "../../redux/contacts/contactsThunk";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import Avatar from "react-avatar";
 import moment from "moment";
+import { MdDelete } from "react-icons/md";
+import { DetailsContainer } from "./ContactDetails.styled";
+import Modal from "../Modal/Modal";
+import ActionConfirmation from "../ActionConfirmation/ActionConfirmation";
 
 // import { Facebook } from "react-content-loader";
 // const MyFacebookLoader = () => <Facebook />;
 
 export default function ContactDetails() {
 	const { contactDetails } = useSelector((state) => state.contacts);
+	const [isModalOpen, setIsModalOpen] = useState(false);
 	const { id } = useParams();
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		dispatch(getContactById(id));
@@ -37,10 +44,24 @@ export default function ContactDetails() {
 		);
 	};
 
+	const onRemoveBtnClick = (id) => {
+		dispatch(removeContactById(id));
+		hideModal();
+		navigate("/contacts");
+	};
+
+	const showModal = () => {
+		setIsModalOpen(true);
+	};
+
+	const hideModal = () => {
+		setIsModalOpen(false);
+	};
+
 	if (Object.keys(contactDetails).length === 0) return;
 
 	return (
-		<div className="container">
+		<DetailsContainer className="container">
 			<Avatar
 				name={name}
 				maxInitials={2}
@@ -67,6 +88,22 @@ export default function ContactDetails() {
 				onChange={toggleFavorite}
 				className="checkbox"
 			/>
-		</div>
+			<button type="button" className="delete-btn" onClick={showModal}>
+				<MdDelete size={25} />
+			</button>
+			{isModalOpen && (
+				<Modal
+					children={
+						<ActionConfirmation
+							name={name}
+							id={_id}
+							onRemoveBtnClick={onRemoveBtnClick}
+							hideModal={hideModal}
+						/>
+					}
+					hideModal={hideModal}
+				/>
+			)}
+		</DetailsContainer>
 	);
 }
