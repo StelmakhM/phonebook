@@ -14,7 +14,7 @@ import moment from "moment";
 import { MdDelete, MdEdit } from "react-icons/md";
 import { DetailsContainer } from "./ContactDetails.styled";
 import Modal from "../Modal/Modal";
-import ActionConfirmation from "../ActionConfirmation/ActionConfirmation";
+import ModalConfirmDelete from "../ModalConfirmDelete/ModalConfirmDelete";
 import ModalEditContact from "../ModalEditContact/ModalEditContact";
 import { Link } from "react-router-dom";
 
@@ -126,7 +126,7 @@ export default function ContactDetails() {
 					hideModal={hideModal}
 					children={
 						!isEditing ? (
-							<ActionConfirmation
+							<ModalConfirmDelete
 								name={name}
 								id={_id}
 								onRemoveBtnClick={onRemoveBtnClick}

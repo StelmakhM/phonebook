@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-	getAllContacts,
-	removeContactById,
-} from "../../redux/contacts/contactsThunk";
+import { getAllContacts } from "../../redux/contacts/contactsThunk";
 import ContactItem from "../ContactItem/ContactItem";
 import ContactFilter from "../ContactsFilter/ContactsFilter";
 import { List } from "./ContactsList.styled";
@@ -11,8 +8,9 @@ import { useLocation, useNavigate } from "react-router";
 
 export default function ContactsList() {
 	const { contacts } = useSelector((state) => state.contacts);
-	// const [contactId, setContactId] = useState("");
-	const [filter, setFilter] = useState("");
+	const [filter, setFilter] = useState(
+		() => sessionStorage.getItem("filter") || ""
+	);
 
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
@@ -46,6 +44,7 @@ export default function ContactsList() {
 		}
 		const { id } = e.target.closest("li").dataset;
 		sessionStorage.setItem("scrollPosition", window.pageYOffset);
+		sessionStorage.setItem("filter", filter);
 		navigate(`${id}`, {
 			state: {
 				from: location,
