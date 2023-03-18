@@ -6,30 +6,33 @@ import {
 } from "../../redux/contacts/contactsThunk";
 import ContactItem from "../ContactItem/ContactItem";
 import ContactFilter from "../ContactsFilter/ContactsFilter";
-// import Modal from "../Modal";
 import { List } from "./ContactsList.styled";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 
 export default function ContactsList() {
 	const { contacts } = useSelector((state) => state.contacts);
-	const [contactId, setContactId] = useState("");
+	// const [contactId, setContactId] = useState("");
 	const [filter, setFilter] = useState("");
 
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
+	const location = useLocation();
 
 	useEffect(() => {
 		dispatch(getAllContacts());
 	}, [dispatch]);
 
-	// const hideModal = () => {
-	// 	setIsModalOpen(false);
-	// };
+	const handleScrollPosition = () => {
+		const scrollPosition = sessionStorage.getItem("scrollPosition");
+		if (scrollPosition) {
+			window.scrollTo(0, parseInt(scrollPosition));
+			sessionStorage.removeItem("scrollPosition");
+		}
+	};
 
-	// const onEditBtnClick = (id) => {
-	// 	setContactId(id);
-	// 	setIsModalOpen(true);
-	// };
+	useEffect(() => {
+		handleScrollPosition();
+	});
 
 	if (contacts.length === 0) return;
 
@@ -42,7 +45,12 @@ export default function ContactsList() {
 			return;
 		}
 		const { id } = e.target.closest("li").dataset;
-		navigate(`${id}`);
+		sessionStorage.setItem("scrollPosition", window.pageYOffset);
+		navigate(`${id}`, {
+			state: {
+				from: location,
+			},
+		});
 	};
 
 	const onFilterChange = (e) => {
@@ -54,17 +62,9 @@ export default function ContactsList() {
 			<ContactFilter filter={filter} onChange={onFilterChange} />
 			<List onClick={onContactClick}>
 				{visibleContacts.map((contact) => (
-					<ContactItem
-						key={contact._id}
-						{...contact}
-						// onEditBtnClick={onEditBtnClick}
-						// onRemoveBtnClick={onRemoveBtnClick}
-					/>
+					<ContactItem key={contact._id} {...contact} />
 				))}
 			</List>
-			{/* {isModalOpen && (
-				<Modal hideModal={hideModal} contactId={contactId} />
-			)} */}
 		</>
 	);
 }

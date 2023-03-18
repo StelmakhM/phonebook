@@ -11,6 +11,7 @@ const initialState = {
 	contacts: [],
 	isLoading: false,
 	contactDetails: {},
+	filter: "",
 };
 
 const contactsPending = (state, _) => {

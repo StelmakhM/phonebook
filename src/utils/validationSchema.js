@@ -20,3 +20,10 @@ export const registerSchema = yup.object().shape({
 		.oneOf([yup.ref("password"), null], "Passwords don't match")
 		.required("Confirm password"),
 });
+
+export const editContactSchema = yup.object().shape({
+	name: yup.string(),
+	email: yup.string().email("Enter a valid email"),
+	phone: yup.number("Enter a valid number"),
+	address: yup.string(),
+});

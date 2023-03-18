@@ -1,7 +1,7 @@
 import { Checkbox } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router";
+import { useLocation, useNavigate, useParams } from "react-router";
 import {
 	getContactById,
 	removeContactById,
@@ -11,20 +11,21 @@ import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import Avatar from "react-avatar";
 import moment from "moment";
-import { MdDelete } from "react-icons/md";
+import { MdDelete, MdEdit } from "react-icons/md";
 import { DetailsContainer } from "./ContactDetails.styled";
 import Modal from "../Modal/Modal";
 import ActionConfirmation from "../ActionConfirmation/ActionConfirmation";
-
-// import { Facebook } from "react-content-loader";
-// const MyFacebookLoader = () => <Facebook />;
+import ModalEditContact from "../ModalEditContact/ModalEditContact";
+import { Link } from "react-router-dom";
 
 export default function ContactDetails() {
 	const { contactDetails } = useSelector((state) => state.contacts);
 	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [isEditing, setIsEditing] = useState(false);
 	const { id } = useParams();
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
+	const location = useLocation();
 
 	useEffect(() => {
 		dispatch(getContactById(id));
@@ -54,36 +55,58 @@ export default function ContactDetails() {
 		setIsModalOpen(true);
 	};
 
+	const showEditModal = () => {
+		setIsModalOpen(true);
+		setIsEditing(true);
+	};
+
 	const hideModal = () => {
 		setIsModalOpen(false);
+		setIsEditing(false);
 	};
 
 	if (Object.keys(contactDetails).length === 0) return;
 
 	return (
-		<DetailsContainer className="container">
+		<DetailsContainer>
+			<Link to={location.from ?? "/contacts"}> Go back</Link>
 			<Avatar
 				name={name}
 				maxInitials={2}
-				size="160px"
+				size="80px"
 				textSizeRatio={1.5}
 				round
 				className="avatar"
 			/>
-			<p>Name : {name}</p>
-			<p>email : {email}</p>
-			<p>phone : {phone}</p>
-			<p>address : {address}</p>
-			<p>
-				Added to phonebook :{" "}
-				{moment(createdAt).format("MMMM Do YYYY, kk:mm")}
-			</p>
-			<p>
-				Last edited : {moment(updatedAt).format("MMMM Do YYYY, kk:mm")}
-			</p>
+			<div>
+				<div className="contact-info">
+					<span className="info-title">Name:</span>
+					<span className="info-text">{name}</span>
+				</div>
+				<div className="contact-info">
+					<span className="info-title">Email:</span>
+					<span className="info-text">{email}</span>
+				</div>
+				<div className="contact-info">
+					<span className="info-title">Phone:</span>
+					<span className="info-text">{phone}</span>
+				</div>
+				<div className="contact-info">
+					<span className="info-title">Address:</span>
+					<span className="info-text">{address}</span>
+				</div>
+				<p>
+					Added to phonebook :{" "}
+					{moment(createdAt).format("MMMM Do YYYY, kk:mm")}
+				</p>
+				<p>
+					Last edited :{" "}
+					{moment(updatedAt).format("MMMM Do YYYY, kk:mm")}
+				</p>
+			</div>
 			<Checkbox
 				icon={<BookmarkBorderIcon />}
-				checkedIcon={<BookmarkIcon />}
+				checkedIcon={<BookmarkIcon color="success" />}
 				checked={favorite}
 				onChange={toggleFavorite}
 				className="checkbox"
@@ -91,17 +114,28 @@ export default function ContactDetails() {
 			<button type="button" className="delete-btn" onClick={showModal}>
 				<MdDelete size={25} />
 			</button>
+			<button
+				type="button"
+				className="delete-btn"
+				onClick={showEditModal}
+			>
+				<MdEdit size={25} />
+			</button>
 			{isModalOpen && (
 				<Modal
-					children={
-						<ActionConfirmation
-							name={name}
-							id={_id}
-							onRemoveBtnClick={onRemoveBtnClick}
-							hideModal={hideModal}
-						/>
-					}
 					hideModal={hideModal}
+					children={
+						!isEditing ? (
+							<ActionConfirmation
+								name={name}
+								id={_id}
+								onRemoveBtnClick={onRemoveBtnClick}
+								hideModal={hideModal}
+							/>
+						) : (
+							<ModalEditContact hideModal={hideModal} />
+						)
+					}
 				/>
 			)}
 		</DetailsContainer>
