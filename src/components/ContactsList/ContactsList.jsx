@@ -5,6 +5,8 @@ import ContactItem from "../ContactItem/ContactItem";
 import ContactFilter from "../ContactsFilter/ContactsFilter";
 import { List } from "./ContactsList.styled";
 import { useLocation, useNavigate } from "react-router";
+import { MdAddCircle } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 export default function ContactsList() {
 	const { contacts } = useSelector((state) => state.contacts);
@@ -30,6 +32,7 @@ export default function ContactsList() {
 
 	useEffect(() => {
 		handleScrollPosition();
+		sessionStorage.removeItem("filter");
 	});
 
 	if (contacts.length === 0) return;
@@ -58,6 +61,12 @@ export default function ContactsList() {
 
 	return (
 		<>
+			<div>
+				<Link to="addcontact">
+					<MdAddCircle />
+					Add new contact
+				</Link>
+			</div>
 			<ContactFilter filter={filter} onChange={onFilterChange} />
 			<List onClick={onContactClick}>
 				{visibleContacts.map((contact) => (

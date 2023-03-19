@@ -4,6 +4,7 @@ import ContactDetails from "./components/ContactDetails/ContactDetails";
 import ProtectedRoute from "./components/ProtecterRoute";
 import ContactsPage from "./pages/ContactsPage";
 import RegisterPage from "./pages/RegisterPage";
+import AddContactForm from "./components/AddContactForm";
 
 const router = createBrowserRouter([
 	{
@@ -20,6 +21,12 @@ const router = createBrowserRouter([
 		path: "/contacts/:id",
 		element: (
 			<ProtectedRoute component={ContactDetails} redirect="/register" />
+		),
+	},
+	{
+		path: "/contacts/addcontact",
+		element: (
+			<ProtectedRoute component={AddContactForm} redirect="/register" />
 		),
 	},
 ]);

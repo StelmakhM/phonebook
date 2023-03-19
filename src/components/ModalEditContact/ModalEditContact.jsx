@@ -48,8 +48,8 @@ export default function ModalEditContact({ hideModal }) {
 				variant="outlined"
 				value={formik.values.email}
 				onChange={formik.handleChange}
-				error={formik.touched.name && Boolean(formik.errors.name)}
-				helperText={formik.touched.name && formik.errors.name}
+				error={formik.touched.email && Boolean(formik.errors.email)}
+				helperText={formik.touched.email && formik.errors.email}
 			/>
 			<CssTextField
 				type="tel"
@@ -59,8 +59,8 @@ export default function ModalEditContact({ hideModal }) {
 				variant="outlined"
 				value={formik.values.phone}
 				onChange={formik.handleChange}
-				error={formik.touched.name && Boolean(formik.errors.name)}
-				helperText={formik.touched.name && formik.errors.name}
+				error={formik.touched.phone && Boolean(formik.errors.phone)}
+				helperText={formik.touched.phone && formik.errors.phone}
 			/>
 			<CssTextField
 				type="text"
@@ -70,8 +70,8 @@ export default function ModalEditContact({ hideModal }) {
 				variant="outlined"
 				value={formik.values.address}
 				onChange={formik.handleChange}
-				error={formik.touched.name && Boolean(formik.errors.name)}
-				helperText={formik.touched.name && formik.errors.name}
+				error={formik.touched.address && Boolean(formik.errors.address)}
+				helperText={formik.touched.address && formik.errors.address}
 			/>
 			<button type="submit">Save changes</button>
 			<button type="button" onClick={hideModal}>
