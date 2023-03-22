@@ -7,9 +7,13 @@ import { List } from "./ContactsList.styled";
 import { useLocation, useNavigate } from "react-router";
 import { MdAddCircle } from "react-icons/md";
 import { Link } from "react-router-dom";
+import { logoutUser } from "../../redux/user/userThunk";
+import Modal from "../Modal/Modal";
+import { Grid } from "@mui/material";
 
 export default function ContactsList() {
 	const { contacts } = useSelector((state) => state.contacts);
+	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [filter, setFilter] = useState(
 		() => sessionStorage.getItem("filter") || ""
 	);
@@ -59,6 +63,14 @@ export default function ContactsList() {
 		setFilter(e.target.value);
 	};
 
+	const onLogoutClick = () => {
+		setIsModalOpen(true);
+	};
+
+	const hideModal = () => {
+		setIsModalOpen(false);
+	};
+
 	return (
 		<>
 			<div>
@@ -66,13 +78,17 @@ export default function ContactsList() {
 					<MdAddCircle />
 					Add new contact
 				</Link>
+				<button type="button" onClick={onLogoutClick}>
+					Logout
+				</button>
 			</div>
 			<ContactFilter filter={filter} onChange={onFilterChange} />
-			<List onClick={onContactClick}>
+			<Grid component="ul" onClick={onContactClick} container spacing={2}>
 				{visibleContacts.map((contact) => (
 					<ContactItem key={contact._id} {...contact} />
 				))}
-			</List>
+			</Grid>
+			{isModalOpen && <Modal hideModal={hideModal} />}
 		</>
 	);
 }

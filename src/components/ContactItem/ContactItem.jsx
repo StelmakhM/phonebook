@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import { updateContactById } from "../../redux/contacts/contactsThunk";
-import { Checkbox } from "@mui/material";
+import { Box, Card, Checkbox, Grid, Typography } from "@mui/material";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import Avatar from "react-avatar";
-import { Wrapper } from "./ContactItem.styled";
+// import { Wrapper } from "./ContactItem.styled";
 
 export default function ContactItem({
 	_id,
@@ -30,28 +30,24 @@ export default function ContactItem({
 	};
 
 	return (
-		<Wrapper data-id={_id}>
+		<Grid component="li" data-id={_id} item xs={12} sm={6} md={4}>
 			<Avatar
 				name={name}
 				maxInitials={2}
 				size={45}
 				textSizeRatio={1.5}
 				round="10px"
-				className="avatar"
 			/>
-			<div className="contact-info">
-				<p>{name}</p>
-				<p>{phone}</p>
-			</div>
+			<Box>
+				<Typography>{name}</Typography>
+				<Typography>{phone}</Typography>
+			</Box>
 			<Checkbox
 				icon={<BookmarkBorderIcon />}
 				checkedIcon={<BookmarkIcon />}
 				checked={favorite}
 				onChange={onChange}
-				className="checkbox"
 			/>
-			{/* <button onClick={() => onRemoveBtnClick(_id)}>Remove</button>
-			<button onClick={() => onEditBtnClick(_id)}>Edit</button> */}
-		</Wrapper>
+		</Grid>
 	);
 }
