@@ -4,12 +4,16 @@ export default function ContactFilter({ filter, onChange }) {
 		<TextField
 			fullWidth
 			type="text"
-			size="small"
+			size="medium"
 			name="filter"
 			placeholder="Search contacts..."
 			variant="outlined"
 			value={filter}
 			onChange={onChange}
+			sx={{
+				my: 2,
+				px: 3,
+			}}
 		/>
 	);
 }

@@ -1,10 +1,29 @@
 import { useDispatch, useSelector } from "react-redux";
 import { updateContactById } from "../../redux/contacts/contactsThunk";
-import { Box, Card, Checkbox, Grid, Typography } from "@mui/material";
+import {
+	Card,
+	CardContent,
+	Checkbox,
+	Grid,
+	styled,
+	Tooltip,
+	Typography,
+} from "@mui/material";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
+import PersonIcon from "@mui/icons-material/Person";
+import CallIcon from "@mui/icons-material/Call";
 import Avatar from "react-avatar";
-// import { Wrapper } from "./ContactItem.styled";
+import Fade from "@mui/material/Fade";
+
+const Contact = styled(Card)({
+	cursor: "pointer",
+	transition: "all 0.3s",
+	"&:hover": {
+		transform: "scale(1.05)",
+		boxShadow: "0px 5px 15px rgba(0, 0, 0, 0.3)",
+	},
+});
 
 export default function ContactItem({
 	_id,
@@ -30,24 +49,82 @@ export default function ContactItem({
 	};
 
 	return (
-		<Grid component="li" data-id={_id} item xs={12} sm={6} md={4}>
-			<Avatar
-				name={name}
-				maxInitials={2}
-				size={45}
-				textSizeRatio={1.5}
-				round="10px"
-			/>
-			<Box>
-				<Typography>{name}</Typography>
-				<Typography>{phone}</Typography>
-			</Box>
-			<Checkbox
-				icon={<BookmarkBorderIcon />}
-				checkedIcon={<BookmarkIcon />}
-				checked={favorite}
-				onChange={onChange}
-			/>
+		<Grid component="li" data-id={_id} item xs={12} sm={6} md={6} lg={4}>
+			<Contact elevation={2}>
+				<CardContent>
+					<Grid
+						container
+						direction="column"
+						alignItems="center"
+						position="relative"
+						rowGap={3}
+					>
+						<Tooltip
+							sx={{
+								position: "absolute",
+								top: 0,
+								right: 0,
+							}}
+							placement="top"
+							TransitionComponent={Fade}
+							TransitionProps={{ timeout: 600 }}
+							title={
+								favorite
+									? "Remove from favorite"
+									: "Add to favorite"
+							}
+						>
+							<Checkbox
+								icon={<BookmarkBorderIcon />}
+								checkedIcon={<BookmarkIcon />}
+								checked={favorite}
+								onChange={onChange}
+							/>
+						</Tooltip>
+						<Avatar
+							name={name}
+							maxInitials={2}
+							size={60}
+							textSizeRatio={1.5}
+							round="50%"
+						/>
+						<Grid container rowGap={2}>
+							{/* <Box maxWidth="100%" alignSelf="flex-start"> */}
+							<Grid container gap={1.5}>
+								<Grid item>
+									<Tooltip
+										title="Contacts fullname"
+										placement="top"
+										TransitionComponent={Fade}
+										TransitionProps={{ timeout: 600 }}
+									>
+										<PersonIcon color="info" />
+									</Tooltip>
+								</Grid>
+								<Grid item maxWidth="90%">
+									<Typography noWrap>{name}</Typography>
+								</Grid>
+							</Grid>
+							<Grid container gap={1.5}>
+								<Grid item>
+									<Tooltip
+										title="Contacts phone number"
+										placement="bottom"
+										TransitionComponent={Fade}
+										TransitionProps={{ timeout: 600 }}
+									>
+										<CallIcon color="success" />
+									</Tooltip>
+								</Grid>
+								<Grid item>
+									<Typography noWrap>{phone}</Typography>
+								</Grid>
+							</Grid>
+							{/* </Box> */}
+						</Grid>
+					</Grid>
+				</CardContent>
+			</Contact>
 		</Grid>
 	);
 }

@@ -3,17 +3,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllContacts } from "../../redux/contacts/contactsThunk";
 import ContactItem from "../ContactItem/ContactItem";
 import ContactFilter from "../ContactsFilter/ContactsFilter";
-import { List } from "./ContactsList.styled";
 import { useLocation, useNavigate } from "react-router";
 import { MdAddCircle } from "react-icons/md";
 import { Link } from "react-router-dom";
-import { logoutUser } from "../../redux/user/userThunk";
 import Modal from "../Modal/Modal";
 import { Grid } from "@mui/material";
+import Fab from "@mui/material/Fab";
+import AddIcon from "@mui/icons-material/Add";
+import AddContactFab from "../AddContactFab/AddContactFab";
 
 export default function ContactsList() {
 	const { contacts } = useSelector((state) => state.contacts);
-	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [filter, setFilter] = useState(
 		() => sessionStorage.getItem("filter") || ""
 	);
@@ -63,32 +63,24 @@ export default function ContactsList() {
 		setFilter(e.target.value);
 	};
 
-	const onLogoutClick = () => {
-		setIsModalOpen(true);
-	};
-
-	const hideModal = () => {
-		setIsModalOpen(false);
-	};
-
 	return (
 		<>
-			<div>
-				<Link to="addcontact">
-					<MdAddCircle />
-					Add new contact
-				</Link>
-				<button type="button" onClick={onLogoutClick}>
-					Logout
-				</button>
-			</div>
 			<ContactFilter filter={filter} onChange={onFilterChange} />
-			<Grid component="ul" onClick={onContactClick} container spacing={2}>
+			<Grid
+				component="ul"
+				onClick={onContactClick}
+				container
+				direction="row"
+				justifyContent="flex-start"
+				alignItems="center"
+				columnSpacing={6}
+				rowSpacing={3}
+			>
 				{visibleContacts.map((contact) => (
 					<ContactItem key={contact._id} {...contact} />
 				))}
 			</Grid>
-			{isModalOpen && <Modal hideModal={hideModal} />}
+			<AddContactFab />
 		</>
 	);
 }
