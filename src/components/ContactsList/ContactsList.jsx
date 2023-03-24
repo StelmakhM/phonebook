@@ -1,15 +1,10 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllContacts } from "../../redux/contacts/contactsThunk";
-import ContactItem from "../ContactItem/ContactItem";
-import ContactFilter from "../ContactsFilter/ContactsFilter";
 import { useLocation, useNavigate } from "react-router";
-import { MdAddCircle } from "react-icons/md";
-import { Link } from "react-router-dom";
-import Modal from "../Modal/Modal";
 import { Grid } from "@mui/material";
-import Fab from "@mui/material/Fab";
-import AddIcon from "@mui/icons-material/Add";
+import ContactFilter from "../ContactsFilter/ContactsFilter";
+import ContactItem from "../ContactItem/ContactItem";
 import AddContactFab from "../AddContactFab/AddContactFab";
 
 export default function ContactsList() {
@@ -67,14 +62,13 @@ export default function ContactsList() {
 		<>
 			<ContactFilter filter={filter} onChange={onFilterChange} />
 			<Grid
+				container
 				component="ul"
 				onClick={onContactClick}
-				container
 				direction="row"
 				justifyContent="flex-start"
 				alignItems="center"
-				columnSpacing={6}
-				rowSpacing={3}
+				spacing={{ xs: 2, md: 3 }}
 			>
 				{visibleContacts.map((contact) => (
 					<ContactItem key={contact._id} {...contact} />

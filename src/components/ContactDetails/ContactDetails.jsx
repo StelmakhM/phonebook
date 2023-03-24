@@ -69,7 +69,7 @@ export default function ContactDetails() {
 
 	return (
 		<DetailsContainer>
-			<Link to={location.from ?? "/contacts"}> Go back</Link>
+			<Link to={location.state.from ?? "/contacts"}> Go back</Link>
 			<Avatar
 				name={name}
 				maxInitials={2}

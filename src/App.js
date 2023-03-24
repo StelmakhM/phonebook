@@ -5,6 +5,9 @@ import ProtectedRoute from "./components/ProtecterRoute";
 import ContactsPage from "./pages/ContactsPage";
 import RegisterPage from "./pages/RegisterPage";
 import AddContactForm from "./components/AddContactForm";
+import SharedLayout from "./components/SharedLayout/SharedLayout";
+import { ThemeProvider } from "@mui/material";
+import { theme } from "./styles/theme";
 
 const router = createBrowserRouter([
 	{
@@ -13,26 +16,45 @@ const router = createBrowserRouter([
 	},
 	{
 		path: "/contacts",
-		element: (
-			<ProtectedRoute component={ContactsPage} redirect="/register" />
-		),
-	},
-	{
-		path: "/contacts/:id",
-		element: (
-			<ProtectedRoute component={ContactDetails} redirect="/register" />
-		),
-	},
-	{
-		path: "/contacts/addcontact",
-		element: (
-			<ProtectedRoute component={AddContactForm} redirect="/register" />
-		),
+		element: <SharedLayout />,
+		children: [
+			{
+				index: true,
+				element: (
+					<ProtectedRoute
+						component={ContactsPage}
+						redirect="/register"
+					/>
+				),
+			},
+			{
+				path: "/contacts/:id",
+				element: (
+					<ProtectedRoute
+						component={ContactDetails}
+						redirect="/register"
+					/>
+				),
+			},
+			{
+				path: "/contacts/addcontact",
+				element: (
+					<ProtectedRoute
+						component={AddContactForm}
+						redirect="/register"
+					/>
+				),
+			},
+		],
 	},
 ]);
 
 function App() {
-	return <RouterProvider router={router} />;
+	return (
+		<ThemeProvider theme={theme}>
+			<RouterProvider router={router} />;
+		</ThemeProvider>
+	);
 }
 
 export default App;

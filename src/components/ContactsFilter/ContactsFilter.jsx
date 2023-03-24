@@ -2,7 +2,6 @@ import { TextField } from "@mui/material";
 export default function ContactFilter({ filter, onChange }) {
 	return (
 		<TextField
-			fullWidth
 			type="text"
 			size="medium"
 			name="filter"
@@ -12,7 +11,9 @@ export default function ContactFilter({ filter, onChange }) {
 			onChange={onChange}
 			sx={{
 				my: 2,
-				px: 3,
+				mx: "auto",
+				display: "flex",
+				width: { xs: 1, sm: 0.7, md: 0.5 },
 			}}
 		/>
 	);

@@ -88,20 +88,20 @@ export const CssTextField = styled(TextField)`
 		color: var(--green-300);
 	}
 
-	.css-1pysi21-MuiFormLabel-root-MuiInputLabel-root {
+	/* .css-1pysi21-MuiFormLabel-root-MuiInputLabel-root {
 		font-family: var(--text-font);
 	}
 
 	.css-1n4twyu-MuiInputBase-input-MuiOutlinedInput-input {
 		font-family: var(--text-font);
-	}
+	} */
 
 	.css-k4qjio-MuiFormHelperText-root.Mui-error {
 		position: absolute;
 		bottom: 0;
 		left: 0;
 		transform: translateY(100%);
-		font-family: var(--font-text);
+		/* font-family: var(--font-text); */
 	}
 
 	.css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root.Mui-error
