@@ -60,7 +60,11 @@ export default function ContactsList() {
 
 	return (
 		<>
-			<ContactFilter filter={filter} onChange={onFilterChange} />
+			<ContactFilter
+				filter={filter}
+				onChange={onFilterChange}
+				visibleContacts={visibleContacts}
+			/>
 			<Grid
 				container
 				component="ul"

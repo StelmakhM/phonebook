@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { updateContactById } from "../../redux/contacts/contactsThunk";
 import {
 	Card,
@@ -13,8 +13,9 @@ import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import PersonIcon from "@mui/icons-material/Person";
 import CallIcon from "@mui/icons-material/Call";
-import Avatar from "react-avatar";
 import Fade from "@mui/material/Fade";
+import { Avatar } from "@mui/material";
+import { stringAvatar } from "../../utils/avatarBackground";
 
 const Contact = styled(Card)({
 	cursor: "pointer",
@@ -24,6 +25,16 @@ const Contact = styled(Card)({
 		boxShadow: "0px 5px 15px rgba(0, 0, 0, 0.3)",
 	},
 });
+
+export const StyledAvatar = styled(Avatar)(({ theme }) => ({
+	alignSelf: "center",
+	width: 40,
+	height: 40,
+	[theme.breakpoints.up("sm")]: {
+		width: 50,
+		height: 50,
+	},
+}));
 
 export default function ContactItem({
 	_id,
@@ -81,19 +92,15 @@ export default function ContactItem({
 								onChange={onChange}
 							/>
 						</Tooltip>
-						<Avatar
-							name={name}
-							maxInitials={2}
-							size={60}
-							textSizeRatio={1.5}
-							round="50%"
+						<StyledAvatar
+							variant="rounded"
+							{...stringAvatar(name)}
 						/>
 						<Grid container rowGap={2}>
-							{/* <Box maxWidth="100%" alignSelf="flex-start"> */}
 							<Grid container gap={1.5}>
 								<Grid item>
 									<Tooltip
-										title="Contacts fullname"
+										title="Fullname"
 										placement="top"
 										TransitionComponent={Fade}
 										TransitionProps={{ timeout: 600 }}
@@ -108,7 +115,7 @@ export default function ContactItem({
 							<Grid container gap={1.5}>
 								<Grid item>
 									<Tooltip
-										title="Contacts phone number"
+										title="Phone number"
 										placement="bottom"
 										TransitionComponent={Fade}
 										TransitionProps={{ timeout: 600 }}
@@ -120,7 +127,6 @@ export default function ContactItem({
 									<Typography noWrap>{phone}</Typography>
 								</Grid>
 							</Grid>
-							{/* </Box> */}
 						</Grid>
 					</Grid>
 				</CardContent>

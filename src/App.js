@@ -4,10 +4,10 @@ import ContactDetails from "./components/ContactDetails/ContactDetails";
 import ProtectedRoute from "./components/ProtecterRoute";
 import ContactsPage from "./pages/ContactsPage";
 import RegisterPage from "./pages/RegisterPage";
-import AddContactForm from "./components/AddContactForm";
 import SharedLayout from "./components/SharedLayout/SharedLayout";
 import { ThemeProvider } from "@mui/material";
 import { theme } from "./styles/theme";
+import AddContactForm from "./components/AddContactForm/AddContactForm";
 
 const router = createBrowserRouter([
 	{

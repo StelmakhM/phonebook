@@ -1,24 +1,14 @@
-import { Button, Card, CardContent, Typography } from "@mui/material";
-import { styled } from "@mui/system";
+import { Button, CardContent, Typography } from "@mui/material";
 import { useFormik } from "formik";
 import { useDispatch } from "react-redux";
-import { addNewContact } from "../redux/contacts/contactsThunk";
-import { addContactSchema } from "../utils/validationSchema";
-import BackButton from "./BackButton/BackButton";
-import { CssTextField } from "./RegisterForm/RegisterForm.styled";
-
-const StyledForm = styled("form")(({ theme }) => ({
-	display: "flex",
-	flexDirection: "column",
-}));
-
-const StyledCard = styled(Card)(({ theme }) => ({
-	[theme.breakpoints.up("sm")]: {
-		width: "80%",
-		maxWidth: "600px",
-		margin: "0 auto",
-	},
-}));
+import { addNewContact } from "../../redux/contacts/contactsThunk";
+import { addContactSchema } from "../../utils/validationSchema";
+import BackButton from "../BackButton/BackButton";
+import {
+	StyledCard,
+	StyledForm,
+	StyledTextField,
+} from "./AddContactForm.styled";
 
 export default function AddContactForm() {
 	const dispatch = useDispatch();
@@ -43,7 +33,7 @@ export default function AddContactForm() {
 			<BackButton />
 			<StyledCard>
 				<CardContent>
-					<Typography paragraph variant="h4" textAlign="center">
+					<Typography paragraph variant="h2" textAlign="center">
 						Add new contact
 					</Typography>
 					<StyledForm
@@ -52,7 +42,7 @@ export default function AddContactForm() {
 						autoComplete="off"
 						onSubmit={handleSubmit}
 					>
-						<CssTextField
+						<StyledTextField
 							type="text"
 							size="small"
 							name="name"
@@ -63,7 +53,7 @@ export default function AddContactForm() {
 							error={touched.name && Boolean(errors.name)}
 							helperText={touched.name && errors.name}
 						/>
-						<CssTextField
+						<StyledTextField
 							type="email"
 							size="small"
 							name="email"
@@ -74,7 +64,7 @@ export default function AddContactForm() {
 							error={touched.email && Boolean(errors.email)}
 							helperText={touched.email && errors.email}
 						/>
-						<CssTextField
+						<StyledTextField
 							type="tel"
 							size="small"
 							name="phone"
@@ -85,7 +75,7 @@ export default function AddContactForm() {
 							error={touched.phone && Boolean(errors.phone)}
 							helperText={touched.phone && errors.phone}
 						/>
-						<CssTextField
+						<StyledTextField
 							type="text"
 							size="small"
 							name="address"
@@ -96,7 +86,11 @@ export default function AddContactForm() {
 							error={touched.address && Boolean(errors.address)}
 							helperText={touched.address && errors.address}
 						/>
-						<Button type="submit" variant="contained">
+						<Button
+							type="submit"
+							variant="contained"
+							color="primary"
+						>
 							Save
 						</Button>
 					</StyledForm>

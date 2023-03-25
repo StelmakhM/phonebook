@@ -6,11 +6,14 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
 import LogoutIcon from "@mui/icons-material/Logout";
-import LogoutDialog from "../Dialog/Dialog";
+import CustomDialog from "../Dialog/Dialog";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { logoutUser } from "../../redux/user/userThunk";
 
 export default function Header() {
 	const [isDialogOpen, setisDialogOpen] = useState(false);
+	const dispatch = useDispatch();
 
 	const onDialogClose = () => {
 		setisDialogOpen(false);
@@ -18,6 +21,10 @@ export default function Header() {
 
 	const onLogoutClick = () => {
 		setisDialogOpen(true);
+	};
+
+	const onLogoutUser = () => {
+		dispatch(logoutUser());
 	};
 
 	return (
@@ -50,9 +57,12 @@ export default function Header() {
 					</Toolbar>
 				</AppBar>
 			</Box>
-			<LogoutDialog
+			<CustomDialog
 				isDialogOpen={isDialogOpen}
 				onDialogClose={onDialogClose}
+				dialogtText="Are you sure you would like to logout?"
+				dialogTitle="Confirm Logout"
+				onConfirm={onLogoutUser}
 			/>
 		</>
 	);

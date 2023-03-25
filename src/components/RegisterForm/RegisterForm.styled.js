@@ -72,20 +72,20 @@ export const Wrapper = styled.form`
 
 export const CssTextField = styled(TextField)`
 	&&.css-1u3bzj6-MuiFormControl-root-MuiTextField-root {
-		margin-bottom: 1.7rem;
+		/* margin-bottom: 1.7rem; */
 	}
 
 	.css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root.Mui-focused
 		.MuiOutlinedInput-notchedOutline {
-		border-color: var(--green-300);
+		/* border-color: var(--green-300); */
 	}
 
 	&&:hover fieldset {
-		border-color: var(--green-200);
+		/* border-color: var(--green-200); */
 	}
 
 	&& label.Mui-focused {
-		color: var(--green-300);
+		/* color: var(--green-300);	 */
 	}
 
 	/* .css-1pysi21-MuiFormLabel-root-MuiInputLabel-root {
@@ -106,10 +106,10 @@ export const CssTextField = styled(TextField)`
 
 	.css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root.Mui-error
 		.MuiOutlinedInput-notchedOutline {
-		border-color: rgba(0, 0, 0, 0.23);
+		/* border-color: rgba(0, 0, 0, 0.23); */
 	}
 
 	.css-1pysi21-MuiFormLabel-root-MuiInputLabel-root.Mui-error {
-		color: rgba(0, 0, 0, 0.6);
+		/* color: rgba(0, 0, 0, 0.6); */
 	}
 `;
