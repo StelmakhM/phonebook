@@ -6,7 +6,7 @@ import PermContactCalendarRoundedIcon from "@mui/icons-material/PermContactCalen
 import Fade from "@mui/material/Fade";
 import { Tooltip } from "@mui/material";
 
-export default function ContactFilter({ filter, onChange, visibleContacts }) {
+export default function ContactFilter({ filter, onChange, filteredContacts }) {
 	return (
 		<TextField
 			type="text"
@@ -37,7 +37,7 @@ export default function ContactFilter({ filter, onChange, visibleContacts }) {
 							TransitionProps={{ timeout: 600 }}
 						>
 							<Badge
-								badgeContent={visibleContacts.length}
+								badgeContent={filteredContacts.length}
 								color="secondary"
 								showZero
 							>

@@ -60,7 +60,16 @@ export default function ContactItem({
 	};
 
 	return (
-		<Grid component="li" data-id={_id} item xs={12} sm={6} md={6} lg={4}>
+		<Grid
+			component="li"
+			data-id={_id}
+			item
+			xs={12}
+			sm={9}
+			md={6}
+			lg={4}
+			// mx="auto"
+		>
 			<Contact elevation={2}>
 				<CardContent>
 					<Grid

@@ -29,34 +29,32 @@ export default function Header() {
 
 	return (
 		<>
-			<Box sx={{ flexGrow: 1, mb: 3 }}>
-				<AppBar position="static">
-					<Toolbar>
-						<Typography
-							variant="h2"
-							component="h1"
-							sx={{ flexGrow: 1 }}
-						>
-							Phonebook
-						</Typography>
-						<Button
-							onClick={onLogoutClick}
-							color="inherit"
-							endIcon={<LogoutIcon />}
-							sx={{ display: { xs: "none", sm: "flex" } }}
-						>
-							Logout
-						</Button>
-						<IconButton
-							onClick={onLogoutClick}
-							color="inherit"
-							sx={{ display: { xs: "block", sm: "none" } }}
-						>
-							<LogoutIcon />
-						</IconButton>
-					</Toolbar>
-				</AppBar>
-			</Box>
+			<AppBar position="relative" sx={{ zIndex: 1201 }}>
+				<Toolbar>
+					<Typography
+						variant="h2"
+						component="h1"
+						sx={{ flexGrow: 1 }}
+					>
+						Phonebook
+					</Typography>
+					<Button
+						onClick={onLogoutClick}
+						color="inherit"
+						endIcon={<LogoutIcon />}
+						sx={{ display: { xs: "none", sm: "flex" } }}
+					>
+						Logout
+					</Button>
+					<IconButton
+						onClick={onLogoutClick}
+						color="inherit"
+						sx={{ display: { xs: "block", sm: "none" } }}
+					>
+						<LogoutIcon />
+					</IconButton>
+				</Toolbar>
+			</AppBar>
 			<CustomDialog
 				isDialogOpen={isDialogOpen}
 				onDialogClose={onDialogClose}

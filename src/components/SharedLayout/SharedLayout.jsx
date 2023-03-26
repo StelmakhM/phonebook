@@ -2,13 +2,17 @@ import React from "react";
 import { Outlet } from "react-router";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
-import { Container } from "@mui/material";
+import { Container, Box } from "@mui/material";
+import SideBar from "../SideBar/SideBar";
 
 export default function SharedLayout() {
 	return (
-		<Container maxWidth="lg">
+		<Container maxWidth="lg" sx={{ position: "relative" }}>
 			<Header />
-			<Outlet />
+			<Box component="main" display="flex">
+				<SideBar />
+				<Outlet />
+			</Box>
 			<Footer />
 		</Container>
 	);

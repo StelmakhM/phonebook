@@ -2,13 +2,15 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllContacts } from "../../redux/contacts/contactsThunk";
 import { useLocation, useNavigate } from "react-router";
-import { Grid } from "@mui/material";
+import { Grid, Container } from "@mui/material";
 import ContactFilter from "../ContactsFilter/ContactsFilter";
 import ContactItem from "../ContactItem/ContactItem";
 import AddContactFab from "../AddContactFab/AddContactFab";
+import CustomPagination from "../Pagination/Pagination";
 
 export default function ContactsList() {
 	const { contacts } = useSelector((state) => state.contacts);
+	const [visibleContacts, setVisibleContacts] = useState(contacts);
 	const [filter, setFilter] = useState(
 		() => sessionStorage.getItem("filter") || ""
 	);
@@ -36,7 +38,7 @@ export default function ContactsList() {
 
 	if (contacts.length === 0) return;
 
-	const visibleContacts = contacts.filter((contact) =>
+	const filteredContacts = contacts.filter((contact) =>
 		contact.name.toLowerCase().includes(filter.toLowerCase())
 	);
 
@@ -59,11 +61,18 @@ export default function ContactsList() {
 	};
 
 	return (
-		<>
+		<Container
+			sx={{
+				display: "flex",
+				flexDirection: "column",
+				gap: 2,
+				alignItems: "center",
+			}}
+		>
 			<ContactFilter
 				filter={filter}
 				onChange={onFilterChange}
-				visibleContacts={visibleContacts}
+				filteredContacts={filteredContacts}
 			/>
 			<Grid
 				container
@@ -79,6 +88,11 @@ export default function ContactsList() {
 				))}
 			</Grid>
 			<AddContactFab />
-		</>
+			<CustomPagination
+				filteredContacts={filteredContacts}
+				setVisibleContacts={setVisibleContacts}
+				filter={filter}
+			/>
+		</Container>
 	);
 }
