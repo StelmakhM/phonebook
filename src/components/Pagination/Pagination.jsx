@@ -13,21 +13,23 @@ export default function CustomPagination({
 
 	const startIndex = (page - 1) * contactsPerPage;
 	const endIndex = startIndex + contactsPerPage;
-	const contactsForPage = filteredContacts.slice(startIndex, endIndex);
+	const contactsToRender = filteredContacts.slice(startIndex, endIndex);
 
 	useEffect(() => {
-		setVisibleContacts(contactsForPage);
+		setVisibleContacts(contactsToRender);
 		// setPage(1);
 	});
 
 	return (
-		<Pagination
-			size="large"
-			count={numPages}
-			page={page}
-			onChange={(event, value) => setPage(value)}
-			color="primary"
-			sx={{ alignContent: "flex-end" }}
-		/>
+		filteredContacts.length >= contactsPerPage && (
+			<Pagination
+				size="large"
+				count={numPages}
+				page={page}
+				onChange={(event, value) => setPage(value)}
+				color="primary"
+				sx={{ alignContent: "flex-end" }}
+			/>
+		)
 	);
 }

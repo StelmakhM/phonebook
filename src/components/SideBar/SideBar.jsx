@@ -1,69 +1,75 @@
 import {
-	Drawer,
 	List,
-	ListItem,
 	ListItemButton,
 	ListItemIcon,
-	Divider,
 	Box,
-	Toolbar,
 	ListItemText,
 } from "@mui/material";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
 
-export default function SideBar() {
-	return (
-		<Drawer
-			variant="permanent"
-			sx={{
-				width: 200,
-				flexShrink: 0,
-				[`& .MuiDrawer-paper`]: {
-					width: 200,
-					boxSizing: "border-box",
-					position: "static",
-				},
-			}}
-		>
-			{/* <Toolbar /> */}
-			<Box sx={{ overflow: "auto" }}>
-				<List>
-					{["Inbox", "Starred", "Send email", "Drafts"].map(
-						(text, index) => (
-							<ListItem key={text} disablePadding>
-								<ListItemButton>
-									<ListItemIcon>
-										{index % 2 === 0 ? (
-											<InboxIcon />
-										) : (
-											<MailIcon />
-										)}
-									</ListItemIcon>
-									<ListItemText primary={text} />
-								</ListItemButton>
-							</ListItem>
-						)
-					)}
-				</List>
-				<Divider />
-				<List>
-					{["All mail", "Trash", "Spam"].map((text, index) => (
-						<ListItem key={text} disablePadding>
-							<ListItemButton>
-								<ListItemIcon>
-									{index % 2 === 0 ? (
-										<InboxIcon />
-									) : (
-										<MailIcon />
-									)}
-								</ListItemIcon>
-								<ListItemText primary={text} />
-							</ListItemButton>
-						</ListItem>
-					))}
-				</List>
-			</Box>
-		</Drawer>
+import {
+	sideBarIcons,
+	StyledDrawer,
+	StyledLink,
+	StyledListItem,
+} from "./SideBar.styled";
+
+const SideBar = ({ mobileOpen, handleDrawerToggle }) => {
+	const sideBarContent = (
+		<Box component="nav" sx={{ overflow: "hidden" }}>
+			<List>
+				{sideBarIcons.map(({ text, icon, href }) => (
+					<StyledListItem key={text} disablePadding>
+						<ListItemButton
+							component={StyledLink}
+							to={href}
+							end
+							onClick={handleDrawerToggle}
+						>
+							<ListItemIcon>{icon}</ListItemIcon>
+							<ListItemText
+								primary={text}
+								primaryTypographyProps={{
+									fontSize: { sm: 16, md: 20 },
+								}}
+							/>
+						</ListItemButton>
+					</StyledListItem>
+				))}
+			</List>
+		</Box>
 	);
-}
+
+	return (
+		<>
+			<StyledDrawer
+				variant="permanent"
+				sx={{
+					display: {
+						xs: "none",
+						sm: "block",
+					},
+				}}
+			>
+				{sideBarContent}
+			</StyledDrawer>
+			<StyledDrawer
+				variant="temporary"
+				open={mobileOpen}
+				onClose={handleDrawerToggle}
+				ModalProps={{
+					keepMounted: true,
+				}}
+				sx={{
+					display: {
+						xs: "block",
+						sm: "none",
+					},
+				}}
+			>
+				{sideBarContent}
+			</StyledDrawer>
+		</>
+	);
+};
+
+export default SideBar;

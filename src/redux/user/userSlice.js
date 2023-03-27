@@ -23,10 +23,10 @@ const userPending = (state, _) => {
 
 const userFulfilled = (state, { payload }) => {
 	const { user } = payload;
-	state.isLoading = false;
-	state.user = user;
-	state.isLoggedIn = true;
 	addUserToLocalStorage(user);
+	state.user = user;
+	state.isLoading = false;
+	state.isLoggedIn = true;
 };
 const userRejected = (state, { payload }) => {
 	state.isLoading = false;

@@ -28,6 +28,15 @@ const router = createBrowserRouter([
 				),
 			},
 			{
+				path: "/contacts/favorite",
+				element: (
+					<ProtectedRoute
+						component={ContactsPage}
+						redirect="/register"
+					/>
+				),
+			},
+			{
 				path: "/contacts/:id",
 				element: (
 					<ProtectedRoute

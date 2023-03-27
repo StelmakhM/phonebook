@@ -6,7 +6,7 @@ import { Link, useLocation } from "react-router-dom";
 export default function BackButton() {
 	const location = useLocation();
 	return (
-		<Link to={location.state.from}>
+		<Link to={location.state?.from ?? "./contacts"}>
 			<Button
 				variant="text"
 				size="large"

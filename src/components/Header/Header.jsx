@@ -10,8 +10,9 @@ import CustomDialog from "../Dialog/Dialog";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { logoutUser } from "../../redux/user/userThunk";
+import MenuIcon from "@mui/icons-material/Menu";
 
-export default function Header() {
+export default function Header({ handleDrawerToggle }) {
 	const [isDialogOpen, setisDialogOpen] = useState(false);
 	const dispatch = useDispatch();
 
@@ -29,8 +30,20 @@ export default function Header() {
 
 	return (
 		<>
-			<AppBar position="relative" sx={{ zIndex: 1201 }}>
+			<AppBar
+				position="relative"
+				sx={{ zIndex: 1201, py: { sm: 0.5, md: 1.5 } }}
+			>
 				<Toolbar>
+					<IconButton
+						color="inherit"
+						aria-label="open drawer"
+						edge="start"
+						onClick={handleDrawerToggle}
+						sx={{ mr: 2, display: { sm: "none" } }}
+					>
+						<MenuIcon />
+					</IconButton>
 					<Typography
 						variant="h2"
 						component="h1"
@@ -38,6 +51,7 @@ export default function Header() {
 					>
 						Phonebook
 					</Typography>
+
 					<Button
 						onClick={onLogoutClick}
 						color="inherit"

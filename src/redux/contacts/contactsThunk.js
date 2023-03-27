@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { customFetch } from "../../services/axios";
+import { removeUserFromLocalStorage } from "../../utils/localStorage";
 
 export const getAllContacts = createAsyncThunk(
 	"contacts/getAll",
@@ -9,6 +10,9 @@ export const getAllContacts = createAsyncThunk(
 			return response.data;
 		} catch (error) {
 			console.log(error);
+			if (error.response.data.message === "jwt expired") {
+				removeUserFromLocalStorage();
+			}
 			return thunkAPI.rejectWithValue(error.response.data.message);
 		}
 	}

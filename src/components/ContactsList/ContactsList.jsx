@@ -9,7 +9,7 @@ import AddContactFab from "../AddContactFab/AddContactFab";
 import CustomPagination from "../Pagination/Pagination";
 
 export default function ContactsList() {
-	const { contacts } = useSelector((state) => state.contacts);
+	let { contacts } = useSelector((state) => state.contacts);
 	const [visibleContacts, setVisibleContacts] = useState(contacts);
 	const [filter, setFilter] = useState(
 		() => sessionStorage.getItem("filter") || ""
@@ -18,6 +18,8 @@ export default function ContactsList() {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const location = useLocation();
+
+	const isFavorite = location.pathname.includes("favorite");
 
 	useEffect(() => {
 		dispatch(getAllContacts());
@@ -38,6 +40,10 @@ export default function ContactsList() {
 
 	if (contacts.length === 0) return;
 
+	if (isFavorite) {
+		contacts = [...contacts].filter((contact) => contact.favorite);
+	}
+
 	const filteredContacts = contacts.filter((contact) =>
 		contact.name.toLowerCase().includes(filter.toLowerCase())
 	);
@@ -49,7 +55,7 @@ export default function ContactsList() {
 		const { id } = e.target.closest("li").dataset;
 		sessionStorage.setItem("scrollPosition", window.pageYOffset);
 		sessionStorage.setItem("filter", filter);
-		navigate(`${id}`, {
+		navigate(isFavorite ? `/contacts/${id}` : `${id}`, {
 			state: {
 				from: location,
 			},
@@ -83,16 +89,16 @@ export default function ContactsList() {
 				alignItems="center"
 				spacing={{ xs: 2, md: 3 }}
 			>
-				{visibleContacts.map((contact) => (
+				{filteredContacts.reverse().map((contact) => (
 					<ContactItem key={contact._id} {...contact} />
 				))}
 			</Grid>
 			<AddContactFab />
-			<CustomPagination
+			{/* <CustomPagination
 				filteredContacts={filteredContacts}
 				setVisibleContacts={setVisibleContacts}
 				filter={filter}
-			/>
+			/> */}
 		</Container>
 	);
 }

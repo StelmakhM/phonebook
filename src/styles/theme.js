@@ -1,13 +1,14 @@
 import { createTheme } from "@mui/material";
+import { lightGreen, deepOrange } from "@mui/material/colors/";
 
 export const themeOptions = {
 	palette: {
 		mode: "light",
 		primary: {
-			main: "#2f601f",
+			main: lightGreen[800],
 		},
 		secondary: {
-			main: "#9c27b0",
+			main: deepOrange[700],
 		},
 	},
 	typography: {
