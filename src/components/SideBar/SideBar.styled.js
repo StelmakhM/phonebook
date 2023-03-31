@@ -25,18 +25,22 @@ export const sideBarIcons = [
 
 export const StyledDrawer = styled(Drawer)(({ theme }) => ({
 	zIndex: 1202,
-	width: 250,
+	width: 200,
 	flexShrink: 0,
 	[`& .MuiDrawer-paper`]: {
-		backgroundColor: { sm: "transparent" },
 		width: 200,
 		boxSizing: "border-box",
 		position: "static",
 	},
-	[theme.breakpoints.up("md")]: {
-		width: 300,
+	[theme.breakpoints.up("sm")]: {
 		[`& .MuiDrawer-paper`]: {
-			width: 300,
+			backgroundColor: "transparent",
+		},
+	},
+	[theme.breakpoints.up("md")]: {
+		width: 250,
+		[`& .MuiDrawer-paper`]: {
+			width: 250,
 		},
 	},
 }));

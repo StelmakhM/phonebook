@@ -17,10 +17,9 @@ export default function ContactFilter({ filter, onChange, filteredContacts }) {
 			value={filter}
 			onChange={onChange}
 			sx={{
-				my: 2,
 				mx: "auto",
 				display: "flex",
-				width: { xs: 1, sm: 0.7, md: 0.5 },
+				width: { xs: 1, sm: 0.9, md: 0.6, lg: 0.5 },
 			}}
 			InputProps={{
 				startAdornment: (

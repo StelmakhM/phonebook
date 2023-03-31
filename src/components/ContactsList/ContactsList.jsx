@@ -10,7 +10,7 @@ import CustomPagination from "../Pagination/Pagination";
 
 export default function ContactsList() {
 	let { contacts } = useSelector((state) => state.contacts);
-	const [visibleContacts, setVisibleContacts] = useState(contacts);
+	const [visibleContacts, setVisibleContacts] = useState([]);
 	const [filter, setFilter] = useState(
 		() => sessionStorage.getItem("filter") || ""
 	);
@@ -73,6 +73,7 @@ export default function ContactsList() {
 				flexDirection: "column",
 				gap: 2,
 				alignItems: "center",
+				py: 2,
 			}}
 		>
 			<ContactFilter
@@ -85,20 +86,22 @@ export default function ContactsList() {
 				component="ul"
 				onClick={onContactClick}
 				direction="row"
-				justifyContent="flex-start"
-				alignItems="center"
+				justifyContent={{ xs: "center", md: "flex-start" }}
+				alignItems="flex-start"
+				flexGrow={1}
 				spacing={{ xs: 2, md: 3 }}
 			>
-				{filteredContacts.reverse().map((contact) => (
+				{visibleContacts.map((contact) => (
 					<ContactItem key={contact._id} {...contact} />
 				))}
 			</Grid>
 			<AddContactFab />
-			{/* <CustomPagination
+			<CustomPagination
 				filteredContacts={filteredContacts}
 				setVisibleContacts={setVisibleContacts}
 				filter={filter}
-			/> */}
+				isFavorite={isFavorite}
+			/>
 		</Container>
 	);
 }

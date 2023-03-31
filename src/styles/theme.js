@@ -12,14 +12,15 @@ export const themeOptions = {
 		},
 	},
 	typography: {
+		fontFamily: ["Cabin", "sans-serif"].join(", "),
 		h1: {
-			fontFamily: "Garamond",
+			fontFamily: "Roboto-condensed",
 		},
 		h2: {
-			fontFamily: "Garamond",
+			fontFamily: "Roboto-condensed",
 		},
-		shape: {
-			borderRadius: 4,
+		h3: {
+			fontFamily: "Roboto-condensed",
 		},
 	},
 	spacing: 8,
@@ -40,6 +41,12 @@ theme.typography.h2 = {
 	fontFamily: "Garamond",
 	fontSize: "28px",
 	[theme.breakpoints.up("sm")]: {
+		fontSize: "32px",
+	},
+	[theme.breakpoints.up("md")]: {
+		fontSize: "40px",
+	},
+	[theme.breakpoints.up("lg")]: {
 		fontSize: "48px",
 	},
 };

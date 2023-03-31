@@ -3,9 +3,10 @@ import { Card, Stack } from "@mui/material";
 
 export const StyledCard = styled(Card)(({ theme }) => ({
 	position: "relative",
+	width: "95%",
+	margin: `${theme.spacing(3)} auto`,
 	[theme.breakpoints.up("sm")]: {
-		maxWidth: "600px",
-		margin: "0 auto",
+		maxWidth: "700px",
 	},
 }));
 

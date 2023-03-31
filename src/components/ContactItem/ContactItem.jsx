@@ -1,11 +1,9 @@
 import { useDispatch } from "react-redux";
 import { updateContactById } from "../../redux/contacts/contactsThunk";
 import {
-	Card,
 	CardContent,
 	Checkbox,
 	Grid,
-	styled,
 	Tooltip,
 	Typography,
 } from "@mui/material";
@@ -14,27 +12,8 @@ import BookmarkIcon from "@mui/icons-material/Bookmark";
 import PersonIcon from "@mui/icons-material/Person";
 import CallIcon from "@mui/icons-material/Call";
 import Fade from "@mui/material/Fade";
-import { Avatar } from "@mui/material";
 import { stringAvatar } from "../../utils/avatarBackground";
-
-const Contact = styled(Card)({
-	cursor: "pointer",
-	transition: "all 0.3s",
-	"&:hover": {
-		transform: "scale(1.05)",
-		boxShadow: "0px 5px 15px rgba(0, 0, 0, 0.3)",
-	},
-});
-
-export const StyledAvatar = styled(Avatar)(({ theme }) => ({
-	alignSelf: "center",
-	width: 40,
-	height: 40,
-	[theme.breakpoints.up("sm")]: {
-		width: 50,
-		height: 50,
-	},
-}));
+import { Contact, StyledAvatar } from "./ContactItem.styled";
 
 export default function ContactItem({
 	_id,
@@ -60,16 +39,7 @@ export default function ContactItem({
 	};
 
 	return (
-		<Grid
-			component="li"
-			data-id={_id}
-			item
-			xs={12}
-			sm={9}
-			md={6}
-			lg={4}
-			// mx="auto"
-		>
+		<Grid component="li" data-id={_id} item xs={12} sm={8} md={6} lg={4}>
 			<Contact elevation={2}>
 				<CardContent>
 					<Grid
@@ -117,7 +87,7 @@ export default function ContactItem({
 										<PersonIcon color="info" />
 									</Tooltip>
 								</Grid>
-								<Grid item maxWidth="90%">
+								<Grid item maxWidth="calc(100% - 50px)">
 									<Typography noWrap>{name}</Typography>
 								</Grid>
 							</Grid>
@@ -132,7 +102,7 @@ export default function ContactItem({
 										<CallIcon color="success" />
 									</Tooltip>
 								</Grid>
-								<Grid item>
+								<Grid item maxWidth="calc(100% - 50px)">
 									<Typography noWrap>{phone}</Typography>
 								</Grid>
 							</Grid>

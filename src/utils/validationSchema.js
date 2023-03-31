@@ -31,6 +31,9 @@ export const editContactSchema = yup.object().shape({
 export const addContactSchema = yup.object().shape({
 	name: yup.string().required("Name is required"),
 	email: yup.string().email("Enter a valid email"),
-	phone: yup.number().typeError("Enter a valid phone number"),
+	phone: yup
+		.number()
+		.typeError("Enter a valid phone number")
+		.required("Phone is required"),
 	address: yup.string(),
 });

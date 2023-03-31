@@ -6,13 +6,14 @@ import {
 	Divider,
 	IconButton,
 	Tooltip,
+	Box,
 } from "@mui/material";
 import Fade from "@mui/material/Fade";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate, useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import {
 	getContactById,
 	removeContactById,
@@ -21,11 +22,10 @@ import {
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import moment from "moment";
-import { Link } from "react-router-dom";
 import { StyledCard, StyledStack } from "./ContactDetails.styled";
-import { StyledAvatar } from "../ContactItem/ContactItem";
 import { stringAvatar } from "../../utils/avatarBackground";
 import CustomDialog from "../Dialog/Dialog";
+import { StyledAvatar } from "../ContactItem/ContactItem.styled";
 
 export default function ContactDetails() {
 	const [isDialogOpen, setisDialogOpen] = useState(false);
@@ -34,7 +34,6 @@ export default function ContactDetails() {
 
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-	const location = useLocation();
 
 	useEffect(() => {
 		dispatch(getContactById(id));
@@ -75,8 +74,10 @@ export default function ContactDetails() {
 	const systemInfo = { createdAt, updatedAt };
 
 	return (
-		<>
-			<Link to={location.state.from ?? "/contacts"}> Go back</Link>
+		<Box
+			flexGrow={1}
+			maxWidth={{ sm: "calc(100% - 200px)", md: "calc(100% - 250px)" }}
+		>
 			<StyledCard>
 				<CardContent>
 					<Stack
@@ -94,8 +95,18 @@ export default function ContactDetails() {
 								direction="row"
 								spacing={{ xs: 1, sm: 2 }}
 							>
-								<Typography fontWeight={700}>{key}:</Typography>
-								<Typography noWrap>
+								<Typography
+									fontWeight={700}
+									textTransform="capitalize"
+								>
+									{key}:
+								</Typography>
+								<Typography
+									sx={{
+										wordWrap: "break-word",
+										maxWidth: "calc(100% - 80px)",
+									}}
+								>
 									{contactInfo[key]}
 								</Typography>
 							</Stack>
@@ -108,12 +119,18 @@ export default function ContactDetails() {
 							direction="row"
 							spacing={{ xs: 1, sm: 2 }}
 						>
-							<Typography fontStyle="italic">
+							<Typography
+								fontStyle="italic"
+								fontSize={{ xs: 14, sm: 16 }}
+							>
 								{key === "createdAt"
 									? "Added to phonebook:"
 									: "Last updated:"}
 							</Typography>
-							<Typography fontStyle="italic">
+							<Typography
+								fontStyle="italic"
+								fontSize={{ xs: 14, sm: 16 }}
+							>
 								{moment(systemInfo[key]).format(
 									"MMMM Do YYYY, kk:mm"
 								)}
@@ -124,7 +141,7 @@ export default function ContactDetails() {
 						<Tooltip
 							placement="top"
 							TransitionComponent={Fade}
-							TransitionProps={{ timeout: 600 }}
+							TransitionProps={{ timeout: 400 }}
 							title={
 								favorite
 									? "Remove from favorite"
@@ -141,7 +158,7 @@ export default function ContactDetails() {
 						<Tooltip
 							placement="top"
 							TransitionComponent={Fade}
-							TransitionProps={{ timeout: 600 }}
+							TransitionProps={{ timeout: 400 }}
 							title="Edit contact"
 						>
 							<IconButton>
@@ -151,7 +168,7 @@ export default function ContactDetails() {
 						<Tooltip
 							placement="top"
 							TransitionComponent={Fade}
-							TransitionProps={{ timeout: 600 }}
+							TransitionProps={{ timeout: 400 }}
 							title="Delete contact"
 						>
 							<IconButton onClick={deleteBtnClick}>
@@ -168,6 +185,6 @@ export default function ContactDetails() {
 				dialogtText={`Are you sure you would like to delete ${name} from your phonebook?`}
 				onConfirm={onRemoveBtnClick(_id)}
 			/>
-		</>
+		</Box>
 	);
 }

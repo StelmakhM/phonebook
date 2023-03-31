@@ -1,29 +1,36 @@
 import { styled } from "@mui/system";
-import { TextField } from "@mui/material";
-import { Card } from "@mui/material";
+import { TextField, Button, Card } from "@mui/material";
 
 export const StyledCard = styled(Card)(({ theme }) => ({
+	width: "95%",
+	margin: "0 auto",
 	[theme.breakpoints.up("sm")]: {
-		width: "100%",
-		maxWidth: "600px",
-		margin: "0 auto",
+		width: "90%",
 	},
 }));
 
 export const StyledForm = styled("form")(({ theme }) => ({
 	display: "flex",
 	flexDirection: "column",
-	gap: theme.spacing(3.5),
-	[theme.breakpoints.up("sm")]: {
-		gap: theme.spacing(4.5),
+	[theme.breakpoints.up("lg")]: {
+		gap: theme.spacing(3),
 	},
 }));
 
-export const StyledTextField = styled(TextField)({
-	".css-k4qjio-MuiFormHelperText-root.Mui-error": {
+export const StyledTextField = styled(TextField)(({ theme }) => ({
+	position: "relative",
+	width: "100%",
+	marginBottom: theme.spacing(4),
+	[".css-132mu4n-MuiFormHelperText-root.Mui-error"]: {
 		position: "absolute",
 		bottom: 0,
 		left: 0,
 		transform: "translateY(100%)",
 	},
-});
+}));
+
+export const StyledButton = styled(Button)(({ theme }) => ({
+	minWidth: "90px",
+	flexGrow: "1",
+	maxWidth: "250px",
+}));

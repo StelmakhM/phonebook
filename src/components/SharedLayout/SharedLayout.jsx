@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { Outlet } from "react-router";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
@@ -12,16 +12,26 @@ export default function SharedLayout() {
 		setMobileOpen(!mobileOpen);
 	};
 
-	const container = useRef();
-
 	return (
-		<Container ref={container} maxWidth="lg" sx={{ position: "relative" }}>
+		<Container
+			maxWidth="xl"
+			disableGutters
+			sx={{
+				position: "relative",
+				height: "100vh",
+				display: "flex",
+				flexDirection: "column",
+			}}
+		>
 			<Header handleDrawerToggle={handleDrawerToggle} />
-			<Box component="main" display="flex">
+			<Box
+				component="main"
+				display={{ xs: "block", sm: "flex" }}
+				flexGrow="1"
+			>
 				<SideBar
 					mobileOpen={mobileOpen}
 					handleDrawerToggle={handleDrawerToggle}
-					ref={container.current}
 				/>
 				<Outlet />
 			</Box>
