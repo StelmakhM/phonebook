@@ -8,6 +8,7 @@ import SharedLayout from "./components/SharedLayout/SharedLayout";
 import { ThemeProvider } from "@mui/material";
 import { theme } from "./styles/theme";
 import AddContactForm from "./components/AddContactForm/AddContactForm";
+import ModalEditContact from "./components/ModalEditContact/ModalEditContact";
 
 const router = createBrowserRouter([
 	{
@@ -41,6 +42,15 @@ const router = createBrowserRouter([
 				element: (
 					<ProtectedRoute
 						component={ContactDetails}
+						redirect="/register"
+					/>
+				),
+			},
+			{
+				path: "/contacts/:id/editcontact",
+				element: (
+					<ProtectedRoute
+						component={ModalEditContact}
 						redirect="/register"
 					/>
 				),

@@ -53,7 +53,7 @@ export default function ContactDetails() {
 		);
 	};
 
-	const onRemoveBtnClick = (id) => {
+	const onConfirmDeleteClick = (id) => {
 		return () => {
 			dispatch(removeContactById(id));
 			navigate("/contacts");
@@ -64,7 +64,7 @@ export default function ContactDetails() {
 		setisDialogOpen(false);
 	};
 
-	const deleteBtnClick = () => {
+	const onDeleteBtnClick = () => {
 		setisDialogOpen(true);
 	};
 
@@ -160,7 +160,7 @@ export default function ContactDetails() {
 							TransitionProps={{ timeout: 400 }}
 							title="Edit contact"
 						>
-							<IconButton>
+							<IconButton onClick={() => navigate("editcontact")}>
 								<EditIcon />
 							</IconButton>
 						</Tooltip>
@@ -170,7 +170,7 @@ export default function ContactDetails() {
 							TransitionProps={{ timeout: 400 }}
 							title="Delete contact"
 						>
-							<IconButton onClick={deleteBtnClick}>
+							<IconButton onClick={onDeleteBtnClick}>
 								<DeleteIcon />
 							</IconButton>
 						</Tooltip>
@@ -182,7 +182,7 @@ export default function ContactDetails() {
 				onDialogClose={onDialogClose}
 				dialogTitle="Confirm contact delete"
 				dialogtText={`Are you sure you would like to delete ${name} from your phonebook?`}
-				onConfirm={onRemoveBtnClick(_id)}
+				onConfirm={onConfirmDeleteClick(_id)}
 			/>
 		</Box>
 	);
