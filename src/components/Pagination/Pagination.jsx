@@ -34,14 +34,14 @@ export default function CustomPagination({
 	return (
 		filteredContacts.length > contactsPerPage() && (
 			<Pagination
-				size="large"
+				shape="rounded"
+				size={windowWidth < 600 ? "small" : "medium"}
 				count={numPages}
 				page={page}
 				onChange={(event, value) => {
 					setPage(value);
 				}}
 				color="primary"
-				sx={{ alignContent: "flex-end" }}
 			/>
 		)
 	);

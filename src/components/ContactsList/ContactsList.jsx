@@ -76,6 +76,8 @@ export default function ContactsList() {
 				gap: 2,
 				alignItems: "center",
 				py: 2,
+				maxWidth: { sm: "calc(100% - 200px)" },
+				flexGrow: "1",
 			}}
 		>
 			<ContactFilter
@@ -90,6 +92,7 @@ export default function ContactsList() {
 				direction="row"
 				justifyContent={{ xs: "center", md: "flex-start" }}
 				alignItems="flex-start"
+				alignContent="flex-start"
 				flexGrow={1}
 				spacing={{ xs: 2, md: 3 }}
 			>
@@ -97,7 +100,7 @@ export default function ContactsList() {
 					<ContactItem key={contact._id} {...contact} />
 				))}
 			</Grid>
-			<AddContactFab />
+			{/* <AddContactFab /> */}
 			<CustomPagination
 				filteredContacts={filteredContacts}
 				setVisibleContacts={setVisibleContacts}

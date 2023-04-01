@@ -39,7 +39,7 @@ export default function ContactItem({
 	};
 
 	return (
-		<Grid component="li" data-id={_id} item xs={12} sm={8} md={6} lg={4}>
+		<Grid component="li" data-id={_id} item xs={12} sm={10} md={6} lg={4}>
 			<Contact elevation={2}>
 				<CardContent>
 					<Grid

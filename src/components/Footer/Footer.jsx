@@ -16,9 +16,13 @@ let copyright = String.fromCodePoint(0x00a9);
 export default function Footer() {
 	const windowWidth = useResize();
 	return (
-		<AppBar position="static">
+		<AppBar position="static" component="footer">
 			<Toolbar>
-				<Stack direction="row" spacing={1} alignItems="center">
+				<Stack
+					direction="row"
+					spacing={{ xs: 0, sm: 1 }}
+					alignItems="center"
+				>
 					<Tooltip
 						title="GitHub"
 						placement="top"
@@ -33,7 +37,7 @@ export default function Footer() {
 						>
 							<GitHubIcon
 								fontSize={
-									windowWidth < 900 ? "medium" : "large"
+									windowWidth < 900 ? "small" : "medium"
 								}
 							/>
 						</IconButton>

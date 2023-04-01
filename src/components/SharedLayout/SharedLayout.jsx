@@ -26,8 +26,9 @@ export default function SharedLayout() {
 			<Header handleDrawerToggle={handleDrawerToggle} />
 			<Box
 				component="main"
-				display={{ xs: "block", sm: "flex" }}
+				display="flex"
 				flexGrow="1"
+				flexDirection={{ xs: "column", sm: "row" }}
 			>
 				<SideBar
 					mobileOpen={mobileOpen}
