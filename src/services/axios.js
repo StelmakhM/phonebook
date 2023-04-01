@@ -2,7 +2,7 @@ import axios from "axios";
 import { getUserFromLocalStorage } from "../utils/localStorage";
 
 export const customFetch = axios.create({
-	baseURL: "http://localhost:5050",
+	baseURL: "https://phonebook-api-lo.herokuapp.com/",
 });
 
 customFetch.interceptors.request.use((config) => {
