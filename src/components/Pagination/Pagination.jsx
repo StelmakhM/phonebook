@@ -25,7 +25,7 @@ export default function CustomPagination({
 
 	useEffect(() => {
 		setVisibleContacts(contactsToRender);
-	}, [contactsToRender, filter, page, setVisibleContacts]);
+	}, [filter, page]);
 
 	useEffect(() => {
 		setPage(1);

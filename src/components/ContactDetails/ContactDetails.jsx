@@ -72,7 +72,6 @@ export default function ContactDetails() {
 
 	const contactInfo = { name, phone, email, address };
 	const systemInfo = { createdAt, updatedAt };
-
 	return (
 		<Box
 			flexGrow={1}
