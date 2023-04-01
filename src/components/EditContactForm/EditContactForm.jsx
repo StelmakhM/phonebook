@@ -11,11 +11,11 @@ import {
 	StyledCard,
 	StyledForm,
 	StyledTextField,
-} from "./ModalEditContact.styled";
+} from "./EditContactForm.styled";
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router";
 
-export default function ModalEditContact() {
+export default function EditContactForm() {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 

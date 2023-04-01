@@ -12,10 +12,12 @@ const initialState = {
 	isLoading: false,
 	contactDetails: {},
 	filter: "",
+	newId: "",
 };
 
 const contactsPending = (state, _) => {
 	state.isLoading = true;
+	state.newId = "";
 };
 
 const contactsRejected = (state, { payload }) => {
@@ -71,6 +73,7 @@ const contactsSlice = createSlice({
 			.addCase(addNewContact.fulfilled, (state, { payload }) => {
 				state.isLoading = false;
 				state.contacts.push(payload.data);
+				state.newId = payload.data._id;
 			})
 			.addCase(addNewContact.rejected, contactsRejected);
 	},

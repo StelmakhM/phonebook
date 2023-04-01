@@ -1,6 +1,6 @@
 import { CardContent, Typography, Box } from "@mui/material";
 import { useFormik } from "formik";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addNewContact } from "../../redux/contacts/contactsThunk";
 import { addContactSchema } from "../../utils/validationSchema";
 import {
@@ -9,9 +9,19 @@ import {
 	StyledForm,
 	StyledTextField,
 } from "./AddContactForm.styled";
+import { useNavigate } from "react-router";
+import { useEffect } from "react";
 
 export default function AddContactForm() {
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
+	const { newId } = useSelector((state) => state.contacts);
+
+	useEffect(() => {
+		if (newId !== "") {
+			navigate(`/contacts/${newId}`);
+		}
+	}, [newId]);
 
 	const formik = useFormik({
 		initialValues: {
