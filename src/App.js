@@ -29,7 +29,7 @@ const router = createBrowserRouter([
 				),
 			},
 			{
-				path: "/contacts/favorite",
+				path: "favorite",
 				element: (
 					<ProtectedRoute
 						component={ContactsPage}
@@ -38,7 +38,7 @@ const router = createBrowserRouter([
 				),
 			},
 			{
-				path: "/contacts/:id",
+				path: ":id",
 				element: (
 					<ProtectedRoute
 						component={ContactDetails}
@@ -47,7 +47,7 @@ const router = createBrowserRouter([
 				),
 			},
 			{
-				path: "/contacts/:id/editcontact",
+				path: ":id/editcontact",
 				element: (
 					<ProtectedRoute
 						component={EditContactForm}
@@ -56,7 +56,7 @@ const router = createBrowserRouter([
 				),
 			},
 			{
-				path: "/contacts/addcontact",
+				path: "addcontact",
 				element: (
 					<ProtectedRoute
 						component={AddContactForm}
