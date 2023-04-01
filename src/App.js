@@ -1,4 +1,4 @@
-import { RouterProvider } from "react-router";
+import { Navigate, RouterProvider } from "react-router";
 import { createBrowserRouter } from "react-router-dom";
 import ContactDetails from "./components/ContactDetails/ContactDetails";
 import ProtectedRoute from "./components/ProtecterRoute";
@@ -12,6 +12,10 @@ import EditContactForm from "./components/EditContactForm/EditContactForm";
 
 const router = createBrowserRouter([
 	{
+		path: "/",
+		element: <Navigate to="/contacts" replace />,
+	},
+	{
 		path: "/register",
 		element: <RegisterPage />,
 	},
@@ -22,46 +26,31 @@ const router = createBrowserRouter([
 			{
 				index: true,
 				element: (
-					<ProtectedRoute
-						component={ContactsPage}
-						redirect="/register"
-					/>
+					<ProtectedRoute component={ContactsPage} redirect="/" />
 				),
 			},
 			{
 				path: "favorite",
 				element: (
-					<ProtectedRoute
-						component={ContactsPage}
-						redirect="/register"
-					/>
+					<ProtectedRoute component={ContactsPage} redirect="/" />
 				),
 			},
 			{
 				path: ":id",
 				element: (
-					<ProtectedRoute
-						component={ContactDetails}
-						redirect="/register"
-					/>
+					<ProtectedRoute component={ContactDetails} redirect="/" />
 				),
 			},
 			{
 				path: ":id/editcontact",
 				element: (
-					<ProtectedRoute
-						component={EditContactForm}
-						redirect="/register"
-					/>
+					<ProtectedRoute component={EditContactForm} redirect="/" />
 				),
 			},
 			{
 				path: "addcontact",
 				element: (
-					<ProtectedRoute
-						component={AddContactForm}
-						redirect="/register"
-					/>
+					<ProtectedRoute component={AddContactForm} redirect="/" />
 				),
 			},
 		],
