@@ -10,52 +10,70 @@ import { theme } from "./styles/theme";
 import AddContactForm from "./components/AddContactForm/AddContactForm";
 import EditContactForm from "./components/EditContactForm/EditContactForm";
 
-const router = createBrowserRouter([
-	{
-		path: "/",
-		element: <Navigate to="/contacts" replace />,
-	},
-	{
-		path: "/register",
-		element: <RegisterPage />,
-	},
-	{
-		path: "/contacts",
-		element: <SharedLayout />,
-		children: [
-			{
-				index: true,
-				element: (
-					<ProtectedRoute component={ContactsPage} redirect="/" />
-				),
-			},
-			{
-				path: "favorite",
-				element: (
-					<ProtectedRoute component={ContactsPage} redirect="/" />
-				),
-			},
-			{
-				path: ":id",
-				element: (
-					<ProtectedRoute component={ContactDetails} redirect="/" />
-				),
-			},
-			{
-				path: ":id/editcontact",
-				element: (
-					<ProtectedRoute component={EditContactForm} redirect="/" />
-				),
-			},
-			{
-				path: "addcontact",
-				element: (
-					<ProtectedRoute component={AddContactForm} redirect="/" />
-				),
-			},
-		],
-	},
-]);
+const router = createBrowserRouter(
+	[
+		{
+			path: "/",
+			element: <Navigate to="/contacts" replace />,
+		},
+		{
+			path: "/register",
+			element: <RegisterPage />,
+		},
+		{
+			path: "/contacts",
+			element: <SharedLayout />,
+			children: [
+				{
+					index: true,
+					element: (
+						<ProtectedRoute
+							component={ContactsPage}
+							redirect="/register"
+						/>
+					),
+				},
+				{
+					path: "favorite",
+					element: (
+						<ProtectedRoute
+							component={ContactsPage}
+							redirect="/register"
+						/>
+					),
+				},
+				{
+					path: ":id",
+					element: (
+						<ProtectedRoute
+							component={ContactDetails}
+							redirect="/register"
+						/>
+					),
+				},
+				{
+					path: ":id/editcontact",
+					element: (
+						<ProtectedRoute
+							component={EditContactForm}
+							redirect="/register"
+						/>
+					),
+				},
+				{
+					path: "addcontact",
+					element: (
+						<ProtectedRoute
+							component={AddContactForm}
+							redirect="/register"
+						/>
+					),
+				},
+			],
+		},
+	],
+	{ basename: "/phonebook" }
+);
 
 function App() {
 	return (

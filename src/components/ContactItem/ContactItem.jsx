@@ -66,7 +66,7 @@ export default function ContactItem({
 						>
 							<Checkbox
 								icon={<BookmarkBorderIcon />}
-								checkedIcon={<BookmarkIcon />}
+								checkedIcon={<BookmarkIcon color="success" />}
 								checked={favorite}
 								onChange={onChange}
 							/>
