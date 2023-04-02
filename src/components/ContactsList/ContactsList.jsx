@@ -66,7 +66,7 @@ export default function ContactsList() {
 		setFilter(e.target.value);
 	};
 
-	console.log(`object`);
+	// console.log(`object`);
 
 	return (
 		<Container

@@ -149,7 +149,7 @@ export default function ContactDetails() {
 						>
 							<Checkbox
 								icon={<BookmarkBorderIcon />}
-								checkedIcon={<BookmarkIcon color="success" />}
+								checkedIcon={<BookmarkIcon />}
 								checked={favorite}
 								onChange={toggleFavorite}
 							/>

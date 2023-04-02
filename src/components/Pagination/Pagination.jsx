@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Pagination } from "@mui/material";
 import useResize from "../../hooks/useResize";
-import { useLocation } from "react-router";
 
 export default function CustomPagination({
 	filteredContacts,
@@ -22,10 +21,11 @@ export default function CustomPagination({
 	const startIndex = (page - 1) * contactsPerPage();
 	const endIndex = startIndex + contactsPerPage();
 	const contactsToRender = filteredContacts.slice(startIndex, endIndex);
+	const arrOfFavourites = filteredContacts.map((contact) => contact.favorite);
 
 	useEffect(() => {
 		setVisibleContacts(contactsToRender);
-	}, [filter, page]);
+	}, [filter, page, arrOfFavourites]);
 
 	useEffect(() => {
 		setPage(1);
@@ -35,7 +35,7 @@ export default function CustomPagination({
 		filteredContacts.length > contactsPerPage() && (
 			<Pagination
 				shape="rounded"
-				size={windowWidth < 600 ? "small" : "medium"}
+				size={windowWidth < 600 ? "medium" : "large"}
 				count={numPages}
 				page={page}
 				onChange={(event, value) => {
