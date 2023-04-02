@@ -25,7 +25,7 @@ const SideBar = ({ mobileOpen, handleDrawerToggle }) => {
 							end
 							onClick={handleDrawerToggle}
 						>
-							<ListItemIcon>{icon}</ListItemIcon>
+							<ListItemIcon className="icon">{icon}</ListItemIcon>
 							<ListItemText
 								primary={text}
 								primaryTypographyProps={{

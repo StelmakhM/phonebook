@@ -47,7 +47,7 @@ export const StyledDrawer = styled(Drawer)(({ theme }) => ({
 
 export const StyledLink = styled(NavLink)(({ theme }) => ({
 	"&.active": {
-		".css-cveggr-MuiListItemIcon-root": {
+		".icon": {
 			color: theme.palette.secondary.main,
 		},
 	},
@@ -55,12 +55,12 @@ export const StyledLink = styled(NavLink)(({ theme }) => ({
 
 export const StyledListItem = styled(ListItem)(({ theme }) => ({
 	transition: theme.transitions.create(["transform"], { duration: 400 }),
-	"& .css-cveggr-MuiListItemIcon-root": {
+	"& .icon": {
 		transition: theme.transitions.create(["color"], { duration: 400 }),
 	},
 	":hover": {
 		transform: "translateX(10px)",
-		".css-cveggr-MuiListItemIcon-root": {
+		".icon": {
 			color: theme.palette.secondary.main,
 		},
 	},
