@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/phonebook/static/css/main.d9027fb7.css",
-    "main.js": "/phonebook/static/js/main.72474b87.js",
+    "main.js": "/phonebook/static/js/main.b4aab3af.js",
     "static/media/EBGaramond-VariableFont_wght.ttf": "/phonebook/static/media/EBGaramond-VariableFont_wght.baa0e0cf79395becf7d7.ttf",
     "static/media/Exo2-VariableFont_wght.ttf": "/phonebook/static/media/Exo2-VariableFont_wght.718ec91358aa7ee8083b.ttf",
     "static/media/RobotoCondensed-Italic.ttf": "/phonebook/static/media/RobotoCondensed-Italic.7d70998915d35a40e9fb.ttf",
@@ -13,10 +13,10 @@
     "static/media/phone-logo.svg": "/phonebook/static/media/phone-logo.7f3bbf9fd94aae7dbb19a11e8a706a3d.svg",
     "index.html": "/phonebook/index.html",
     "main.d9027fb7.css.map": "/phonebook/static/css/main.d9027fb7.css.map",
-    "main.72474b87.js.map": "/phonebook/static/js/main.72474b87.js.map"
+    "main.b4aab3af.js.map": "/phonebook/static/js/main.b4aab3af.js.map"
   },
   "entrypoints": [
     "static/css/main.d9027fb7.css",
-    "static/js/main.72474b87.js"
+    "static/js/main.b4aab3af.js"
   ]
 }
